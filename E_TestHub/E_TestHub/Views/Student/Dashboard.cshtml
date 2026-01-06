@@ -1,0 +1,77 @@
+@{
+    ViewData["Title"] = "Dashboard - Sinh Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+}
+
+<!-- Header Section -->
+<div class="header-section">
+    <div class="welcome-text">
+        <h1 class="greeting">Xin chào,</h1>
+        <h2 class="user-name">@ViewBag.UserName</h2>
+    </div>
+</div>
+
+<!-- Quick Action Cards -->
+<div class="quick-actions">
+    <a href="@Url.Action("Classes", "Student")" class="action-card">
+        <div class="card-icon">
+            <i class="fas fa-university"></i>
+        </div>
+        <h3 class="card-title">Danh sách lớp</h3>
+    </a>
+    <a href="@Url.Action("MyExams", "Student")" class="action-card">
+        <div class="card-icon">
+            <i class="fas fa-file-alt"></i>
+        </div>
+        <h3 class="card-title">Bài thi của tôi</h3>
+    </a>
+    <a href="@Url.Action("Profile", "Student")" class="action-card">
+        <div class="card-icon">
+            <i class="fas fa-user-cog"></i>
+        </div>
+        <h3 class="card-title">Quản lý tài khoản</h3>
+    </a>
+</div>
+
+<!-- Content Grid -->
+<div class="content-grid">
+    <!-- Recently Accessed Classes -->
+    <div class="content-section">
+        <div class="section-header">
+            <h3 class="section-title">Lớp truy cập gần đây</h3>
+            <a href="@Url.Action("Classes", "Student")" class="view-more">
+                <span class="fas fa-external-link-alt"></span>
+                Xem thêm
+            </a>
+        </div>
+        <div class="section-content" id="recentClassesContainer">
+            <div class="dashboard-loading">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải lớp học...
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Exams -->
+    <div class="content-section">
+        <div class="section-header">
+            <h3 class="section-title">Lịch thi sắp tới</h3>
+            <a href="@Url.Action("MyExams", "Student")" class="view-more">
+                <span class="fas fa-external-link-alt"></span>
+                Xem thêm
+            </a>
+        </div>
+        <div class="section-content" id="upcomingExamsContainer">
+            <div class="dashboard-loading">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải lịch thi...
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/student/dashboard.js"></script>
+}

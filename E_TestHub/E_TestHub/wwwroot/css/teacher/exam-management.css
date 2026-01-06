@@ -1,0 +1,278 @@
+﻿/* ExamManagement.cshtml - Dashboard Style */
+
+.dashboard-welcome-subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.dashboard-action-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+}
+
+.dashboard-item-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dashboard-item:hover .dashboard-item-actions {
+    opacity: 1;
+}
+
+.dashboard-item-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    color: #4A90E2;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dashboard-item-action-btn:hover {
+    background-color: #4A90E2;
+    color: white;
+    transform: scale(1.1);
+}
+
+.exam-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.exam-stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.exam-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.exam-stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+}
+
+.exam-stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #4A90E2;
+    margin: 0 0 5px 0;
+}
+
+.exam-stat-label {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.exam-table-search {
+    position: relative;
+    width: 300px;
+}
+
+.exam-table-search input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.exam-table-search input:focus {
+    outline: none;
+    border-color: #4A90E2;
+}
+
+.exam-table-search i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.exam-table-container {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+}
+
+.exam-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.exam-table thead {
+    background-color: #f8f9fa;
+}
+
+.exam-table thead th {
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.exam-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.exam-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.exam-table tbody td {
+    padding: 20px 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.exam-table-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.exam-table-name-cell i {
+    color: #4A90E2;
+    font-size: 20px;
+}
+
+.exam-table-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.exam-table-actions a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+    color: #4A90E2;
+    text-decoration: none;
+}
+
+.exam-table-actions a:hover {
+    background-color: #4A90E2;
+    color: white;
+}
+
+.exam-status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-upcoming {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-completed {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.search-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    padding-top: 100px;
+}
+
+.search-modal-content {
+    background-color: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.search-modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 25px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.search-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.search-modal-body {
+    padding: 25px;
+}
+
+.search-modal-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.search-results {
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-result-item:hover {
+    background-color: #f8f9fa;
+}

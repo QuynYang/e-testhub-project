@@ -1,0 +1,141 @@
+@{
+    ViewData["Title"] = "Kết quả bài thi - Sinh Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/student/view-results.css" rel="stylesheet">
+}
+
+<div class="exam-results-container" id="viewResultsContainer" data-exam-id="@ViewBag.ExamId" data-result-id="@ViewBag.ResultId">
+    <div class="questions-sidebar">
+        <div class="student-info-card">
+            <div class="student-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="student-details">
+                <div class="student-name" id="studentName">@ViewBag.UserName</div>
+                <div class="student-id" id="studentIdentifier">Kết quả của bạn</div>
+            </div>
+        </div>
+
+        <div class="exam-details-section">
+            <h4 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                Thông tin bài thi
+            </h4>
+
+            <div class="info-row">
+                <span class="info-label">
+                    <i class="fas fa-calendar-alt"></i>
+                    Ngày thi:
+                </span>
+                <span class="info-value" id="examDateValue">Đang tải...</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">
+                    <i class="fas fa-clock"></i>
+                    Thời gian nộp:
+                </span>
+                <span class="info-value" id="submittedAtValue">Đang tải...</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">
+                    <i class="fas fa-hourglass-half"></i>
+                    Thời gian làm bài:
+                </span>
+                <span class="info-value" id="durationValue">Đang tải...</span>
+            </div>
+
+            <div class="info-row highlight">
+                <span class="info-label">
+                    <i class="fas fa-chart-line"></i>
+                    Độ chính xác:
+                </span>
+                <span class="info-value accuracy" id="accuracyValue">--%</span>
+            </div>
+
+            <div class="info-row highlight">
+                <span class="info-label">
+                    <i class="fas fa-star"></i>
+                    Điểm số:
+                </span>
+                <span class="info-value score" id="scoreValue">--/--</span>
+            </div>
+        </div>
+
+        <div class="question-stats">
+            <div class="stat-row">
+                <span class="stat-label">Tổng số câu:</span>
+                <span class="stat-value" id="totalQuestionsValue">0</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Đúng:</span>
+                <span class="stat-value correct" id="correctCountValue">0</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Sai:</span>
+                <span class="stat-value incorrect" id="incorrectCountValue">0</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Bỏ qua:</span>
+                <span class="stat-value skipped" id="skippedCountValue">0</span>
+            </div>
+        </div>
+
+        <div class="question-grid" id="questionGrid">
+            <div class="dashboard-loading-inline">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải câu hỏi...
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-main-content">
+        <div class="exam-header">
+            <div class="header-left">
+                <a href="@Url.Action("MyExams", "Student")" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Quay lại
+                </a>
+                <h2 class="exam-title" id="examTitle">Đang tải bài thi...</h2>
+            </div>
+            <div class="header-right">
+                <div class="exam-status-badge" id="attemptBadge" style="display:none;"></div>
+            </div>
+        </div>
+
+        <div class="question-content">
+            <div id="resultsMessage" class="results-message" style="display:none;"></div>
+            <div id="questionContainer">
+                <div class="dashboard-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Đang tải kết quả...
+                </div>
+            </div>
+        </div>
+
+        <div class="question-navigation">
+            <button class="nav-btn" id="prevBtn" disabled>
+                <i class="fas fa-chevron-left"></i>
+                Câu trước
+            </button>
+
+            <span class="question-counter">
+                Câu <span id="currentQuestionNum">0</span> / <span id="totalQuestionsCount">0</span>
+            </span>
+
+            <button class="nav-btn" id="nextBtn" disabled>
+                Câu tiếp
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/student/view-results.js"></script>
+}
+

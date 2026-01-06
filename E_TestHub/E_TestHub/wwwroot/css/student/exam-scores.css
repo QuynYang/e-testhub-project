@@ -1,0 +1,637 @@
+/* ===================================
+   EXAM SCORES PAGE STYLES
+   E_TestHub v0.3.0 - Student Module
+   =================================== */
+
+/* Container */
+.exam-scores-container {
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ===================================
+   PAGE HEADER
+   =================================== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.header-content {
+    flex: 1;
+}
+
+.page-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #2F3542;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-title i {
+    color: #2E8BE9;
+    font-size: 28px;
+}
+
+.page-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #6B7280;
+    margin: 0;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-export {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #2E8BE9 0%, #1E6FBF 100%);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(46, 139, 233, 0.3);
+}
+
+.btn-export:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 139, 233, 0.4);
+}
+
+.btn-export i {
+    font-size: 16px;
+}
+
+/* ===================================
+   STATISTICS CARDS
+   =================================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.stat-icon.total {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    color: #FFFFFF;
+}
+
+.stat-icon.average {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: #FFFFFF;
+}
+
+.stat-icon.passed {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: #FFFFFF;
+}
+
+.stat-icon.pending {
+    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    color: #FFFFFF;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6B7280;
+    margin: 0 0 6px 0;
+}
+
+.stat-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #2F3542;
+    margin: 0;
+}
+
+/* ===================================
+   FILTER SECTION
+   =================================== */
+.filter-section {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-box i {
+    position: absolute;
+    left: 16px;
+    color: #9CA3AF;
+    font-size: 16px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #2F3542;
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #2E8BE9;
+    box-shadow: 0 0 0 3px rgba(46, 139, 233, 0.1);
+}
+
+.filter-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-controls select {
+    padding: 12px 16px;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #2F3542;
+    background: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 160px;
+}
+
+.filter-controls select:focus {
+    outline: none;
+    border-color: #2E8BE9;
+}
+
+.filter-controls select:hover {
+    border-color: #2E8BE9;
+}
+
+/* ===================================
+   SCORES TABLE
+   =================================== */
+.scores-table-container {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.scores-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.scores-table thead {
+    background: #F8FAFC;
+}
+
+.scores-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #E5E7EB;
+}
+
+.scores-table tbody tr {
+    border-bottom: 1px solid #F1F5F9;
+    transition: all 0.2s ease;
+}
+
+.scores-table tbody tr:hover {
+    background: #F8FAFC;
+}
+
+.scores-table td {
+    padding: 18px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #2F3542;
+}
+
+/* Exam Name Column */
+.exam-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.exam-name i {
+    color: #2E8BE9;
+    font-size: 16px;
+}
+
+/* Subject Badge */
+.subject-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #EFF6FF;
+    color: #1E40AF;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Exam Date */
+.exam-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.exam-date i {
+    color: #9CA3AF;
+}
+
+/* Score Display */
+.score-display {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.score-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2F3542;
+}
+
+.score-max {
+    font-size: 14px;
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
+.score-pending {
+    color: #9CA3AF;
+    font-size: 18px;
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-badge.graded {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+.status-badge.pending {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.status-badge i {
+    font-size: 11px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-action.view {
+    background: #DBEAFE;
+    color: #1E40AF;
+}
+
+.btn-action.view:hover {
+    background: #2E8BE9;
+    color: #FFFFFF;
+    transform: scale(1.1);
+}
+
+.btn-action.disabled {
+    background: #F3F4F6;
+    color: #9CA3AF;
+    cursor: not-allowed;
+}
+
+.btn-action i {
+    font-size: 14px;
+}
+
+/* ===================================
+   EMPTY STATE
+   =================================== */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: #E5E7EB;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #6B7280;
+    margin: 0 0 8px 0;
+}
+
+.empty-state p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #9CA3AF;
+    margin: 0;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .exam-scores-container {
+        padding: 24px;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-section {
+        flex-direction: column;
+    }
+
+    .search-box {
+        min-width: 100%;
+    }
+
+    .filter-controls {
+        width: 100%;
+    }
+
+    .filter-controls select {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+/* Mobile (320px - 767px) */
+@media (max-width: 767px) {
+    .exam-scores-container {
+        padding: 16px;
+    }
+
+    /* Header */
+    .page-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .page-title i {
+        font-size: 22px;
+    }
+
+    .page-subtitle {
+        font-size: 14px;
+    }
+
+    .btn-export {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+    }
+
+    /* Filter Section */
+    .filter-section {
+        padding: 16px;
+    }
+
+    .filter-controls select {
+        width: 100%;
+    }
+
+    /* Table - Card View */
+    .scores-table-container {
+        box-shadow: none;
+        background: transparent;
+    }
+
+    .scores-table thead {
+        display: none;
+    }
+
+    .scores-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .scores-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border: none;
+        padding: 16px;
+    }
+
+    .scores-table tbody tr:hover {
+        background: #FFFFFF;
+    }
+
+    .scores-table td {
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+    }
+
+    .scores-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6B7280;
+        font-size: 13px;
+    }
+
+    .scores-table td:first-child {
+        padding-top: 0;
+        border-bottom: 1px solid #F1F5F9;
+        padding-bottom: 12px;
+        margin-bottom: 8px;
+    }
+
+    .scores-table td:first-child::before {
+        display: none;
+    }
+
+    .exam-name {
+        width: 100%;
+    }
+
+    .scores-table td:last-child {
+        padding-bottom: 0;
+    }
+
+    .action-buttons {
+        justify-content: flex-end;
+        width: auto;
+    }
+}
+
+/* Small Mobile (320px - 374px) */
+@media (max-width: 374px) {
+    .page-title {
+        font-size: 20px;
+    }
+
+    .stat-value {
+        font-size: 22px;
+    }
+
+    .btn-export {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+@media print {
+    .page-header .header-actions,
+    .filter-section,
+    .action-buttons {
+        display: none;
+    }
+
+    .exam-scores-container {
+        padding: 0;
+    }
+
+    .scores-table-container {
+        box-shadow: none;
+    }
+}

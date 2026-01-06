@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "Quản lý lớp học - Giáo Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/teacher/manage-classes.css" rel="stylesheet">
+}
+
+<!-- Page Header with View Toggle -->
+<div class="header-section">
+    <h1 class="page-title">Quản lý lớp học</h1>
+    
+    <!-- View Mode Toggle -->
+    <div class="view-toggle">
+        <button class="view-btn" data-view="grid" title="Grid View">
+            <i class="fas fa-th"></i>
+        </button>
+        <button class="view-btn active" data-view="list" title="List View">
+            <i class="fas fa-list"></i>
+        </button>
+        <button class="view-btn" data-view="table" title="Table View">
+            <i class="fas fa-table"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Search and Filter Section -->
+<div class="search-section">
+    <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm theo tên lớp, số sinh viên...">
+        <i class="fas fa-search search-icon"></i>
+    </div>
+    
+    <!-- Sort Options -->
+    <div class="sort-section">
+        <label for="sortSelect" class="sort-label">Sắp xếp:</label>
+        <select id="sortSelect" class="sort-select">
+            <option value="name-asc">Tên lớp (A-Z)</option>
+            <option value="name-desc">Tên lớp (Z-A)</option>
+            <option value="students-desc">Sinh viên (Nhiều nhất)</option>
+            <option value="students-asc">Sinh viên (Ít nhất)</option>
+        </select>
+    </div>
+</div>
+
+<!-- Classes Grid -->
+<div class="classes-grid" id="classesGrid">
+    <!-- Will be populated by API -->
+    <div style="text-align: center; padding: 40px;">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+        <p>Đang tải dữ liệu...</p>
+    </div>
+</div>
+
+<!-- List View (hidden by default) -->
+<div class="classes-list" id="classesList" style="display: none;">
+    <!-- Will be populated by JavaScript -->
+</div>
+
+<!-- Table View (hidden by default) -->
+<div class="classes-table-container" id="classesTableContainer" style="display: none;">
+    <table class="classes-table" id="classesTable">
+        <thead>
+            <tr>
+                <th class="sortable" data-sort="name">
+                    Mã lớp <i class="fas fa-sort"></i>
+                </th>
+                <th class="sortable" data-sort="students">
+                    Số sinh viên <i class="fas fa-sort"></i>
+                </th>
+                <th class="sortable" data-sort="year">
+                    Khoá học <i class="fas fa-sort"></i>
+                </th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="classesTableBody">
+            <!-- Will be populated by JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Empty State (hidden by default) -->
+<div class="empty-state" id="emptyState" style="display: none;">
+    <i class="fas fa-search empty-icon"></i>
+    <p>Không tìm thấy lớp học nào phù hợp</p>
+</div>
+
+@section Scripts {
+    <script src="~/js/teacher/manage-classes.js"></script>
+    <script src="~/js/teacher/manage-classes-api.js"></script>
+}

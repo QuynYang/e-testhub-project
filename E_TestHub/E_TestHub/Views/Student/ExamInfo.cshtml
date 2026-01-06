@@ -1,0 +1,90 @@
+@{
+    ViewData["Title"] = "Thông tin bài thi - Sinh Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/student/exam-info.css" rel="stylesheet">
+}
+
+<div class="exam-info-container" id="examInfoContainer" data-exam-id="@ViewBag.ExamId">
+    <div class="exam-info-header" id="examInfoHeader">
+        <h1 class="exam-info-title" id="examTitle">Đang tải bài thi...</h1>
+        <p class="exam-info-subtitle">Thông tin chi tiết về bài thi</p>
+        <div class="exam-status-banner" id="examStatusBanner" style="display:none;">
+            <i id="examStatusIcon" class="fas"></i>
+            <span id="examStatusText"></span>
+        </div>
+    </div>
+    
+    <div class="exam-details-card" id="examDetailsCard">
+        <div class="exam-detail-row">
+            <div class="exam-detail-label">
+                <i class="fas fa-clock"></i>
+                Thời gian làm bài
+            </div>
+            <div class="exam-detail-value" id="examDuration">Đang tải...</div>
+        </div>
+        
+        <div class="exam-detail-row">
+            <div class="exam-detail-label">
+                <i class="fas fa-calendar"></i>
+                Thời gian vào thi
+            </div>
+            <div class="exam-detail-value" id="examStartTime">Đang tải...</div>
+        </div>
+        
+        <div class="exam-detail-row">
+            <div class="exam-detail-label">
+                <i class="fas fa-question-circle"></i>
+                Số lượng câu hỏi
+            </div>
+            <div class="exam-detail-value" id="examQuestionCount">Đang tải...</div>
+        </div>
+
+        <div class="exam-detail-row" id="examTotalPointsRow" style="display:none;">
+            <div class="exam-detail-label">
+                <i class="fas fa-star"></i>
+                Tổng điểm
+            </div>
+            <div class="exam-detail-value" id="examTotalPoints">—</div>
+        </div>
+        
+        <div class="exam-detail-row">
+            <div class="exam-detail-label">
+                <i class="fas fa-chart-bar"></i>
+                Loại đề
+            </div>
+            <div class="exam-detail-value" id="examType">Đang tải...</div>
+        </div>
+        
+        <div class="exam-detail-row">
+            <div class="exam-detail-label">
+                <i class="fas fa-redo"></i>
+                Lần thử
+            </div>
+            <div class="exam-detail-value" id="examAttempts">Đang tải...</div>
+        </div>
+    </div>
+    
+    <div class="exam-instructions" id="examInstructionsContainer" style="display:none;">
+        <h4><i class="fas fa-info-circle"></i> Hướng dẫn làm bài</h4>
+        <ul id="examInstructions">
+            <li id="defaultInstruction">Đang tải hướng dẫn...</li>
+        </ul>
+    </div>
+    
+    <div class="exam-actions" id="examActions"></div>
+    <div class="exam-actions-secondary">
+        <a href="@Url.Action("MyExams", "Student")" class="exam-action-btn secondary">
+            <i class="fas fa-arrow-left"></i>
+            Quay lại danh sách
+        </a>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/js/student/exam-info.js"></script>
+}

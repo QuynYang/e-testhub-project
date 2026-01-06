@@ -1,0 +1,295 @@
+@{
+    ViewData["Title"] = "Quản Lý Trường Học - Quản Trị Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/admin/school-management.css" rel="stylesheet">
+}
+
+<div class="school-management-container">
+    <div class="school-management-header">
+        <h1 class="school-management-title">Quản Lý Trường Học</h1>
+        <p class="school-management-subtitle">Quản lý thông tin trường học, lớp học và khóa học</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClassModal">
+            <i class="fas fa-plus"></i> Thêm Lớp Học
+        </button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCourseModal">
+            <i class="fas fa-plus"></i> Thêm Khóa Học
+        </button>
+        <button class="btn btn-secondary" id="refreshData">
+            <i class="fas fa-sync"></i> Làm Mới
+        </button>
+    </div>
+
+    <!-- Classes Section -->
+    <div class="management-section">
+        <div class="section-header">
+            <h2 class="section-title">Danh Sách Lớp Học</h2>
+            <div class="section-actions">
+                <input type="text" id="classSearch" class="search-input" placeholder="Tìm kiếm lớp học..." />
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="management-table" id="classesTable">
+                <thead>
+                    <tr>
+                        <th>Mã Lớp</th>
+                        <th>Tên Lớp</th>
+                        <th>Khóa Học</th>
+                        <th>Sĩ Số</th>
+                        <th>Giáo Viên Chủ Nhiệm</th>
+                        <th>Trạng Thái</th>
+                        <th>Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Courses Section -->
+    <div class="management-section">
+        <div class="section-header">
+            <h2 class="section-title">Danh Sách Khóa Học</h2>
+            <div class="section-actions">
+                <input type="text" id="courseSearch" class="search-input" placeholder="Tìm kiếm khóa học..." />
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="management-table" id="coursesTable">
+                <thead>
+                    <tr>
+                        <th>Mã Khóa Học</th>
+                        <th>Tên Khóa Học</th>
+                        <th>Năm Bắt Đầu</th>
+                        <th>Năm Kết Thúc</th>
+                        <th>Số Lớp</th>
+                        <th>Trạng Thái</th>
+                        <th>Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Class Modal -->
+<div class="modal fade" id="addClassModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm Lớp Học Mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="addClassForm">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="classCode" class="form-label">Mã Lớp *</label>
+                                <input type="text" id="classCode" name="classCode" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="className" class="form-label">Tên Lớp *</label>
+                                <input type="text" id="className" name="className" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseId" class="form-label">Khóa Học *</label>
+                        <select id="courseId" name="courseId" class="form-control" required>
+                            <option value="">Chọn khóa học</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherId" class="form-label">Giáo Viên Chủ Nhiệm *</label>
+                        <select id="teacherId" name="teacherId" class="form-control" required>
+                            <option value="">Chọn giáo viên</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Thêm Lớp Học</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Class Modal -->
+<div class="modal fade" id="editClassModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chỉnh Sửa Lớp Học</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="editClassTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="edit-class-info-tab" data-bs-toggle="tab" data-bs-target="#edit-class-info" type="button" role="tab">Thông tin lớp</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="edit-class-students-tab" data-bs-toggle="tab" data-bs-target="#edit-class-students" type="button" role="tab">Sinh viên</button>
+                    </li>
+                </ul>
+                <div class="tab-content mt-3">
+                    <div class="tab-pane fade show active" id="edit-class-info" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editClassCode" class="form-label">Mã Lớp *</label>
+                                    <input type="text" id="editClassCode" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editClassName" class="form-label">Tên Lớp *</label>
+                                    <input type="text" id="editClassName" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editCourseId" class="form-label">Khóa Học *</label>
+                                    <select id="editCourseId" class="form-control" required>
+                                        <option value="">Chọn khóa học</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editTeacherId" class="form-label">Giáo Viên Chủ Nhiệm *</label>
+                                    <select id="editTeacherId" class="form-control" required>
+                                        <option value="">Chọn giáo viên</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editAcademicYear" class="form-label">Khóa *</label>
+                                    <input type="text" id="editAcademicYear" class="form-control" placeholder="Ví dụ: 2025-2026">
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" type="checkbox" id="editClassStatus" checked>
+                                    <label class="form-check-label" for="editClassStatus">Lớp đang hoạt động</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="edit-class-students" role="tabpanel">
+                        <div class="student-management-container">
+                            <div class="student-selection-section">
+                                <label class="form-label">Danh sách sinh viên</label>
+                                <input type="text" id="studentCheckboxSearch" class="form-control" placeholder="Lọc theo tên, email hoặc mã sinh viên...">
+                                <div id="studentCheckboxList" class="student-checkbox-list mt-3"></div>
+                            </div>
+                            <div class="selected-students-section mt-3">
+                                <h6>Sinh viên đã chọn</h6>
+                                <div id="selectedStudentsContainer" class="selected-students-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="editClassStatusMessage" class="form-status mt-3"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="saveEditClassBtn">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Course Modal -->
+<div class="modal fade" id="addCourseModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm Khóa Học Mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="addCourseForm">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="courseCode" class="form-label">Mã Khóa Học *</label>
+                                <input type="text" id="courseCode" name="courseCode" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="courseName" class="form-label">Tên Khóa Học *</label>
+                                <input type="text" id="courseName" name="courseName" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="startYear" class="form-label">Năm Bắt Đầu *</label>
+                                <input type="number" id="startYear" name="startYear" class="form-control" min="2020" max="2030" value="2024" required />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="endYear" class="form-label">Năm Kết Thúc *</label>
+                                <input type="number" id="endYear" name="endYear" class="form-control" min="2020" max="2030" value="2025" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Thêm Khóa Học</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/admin/school-management-api.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Refresh data - handled by school-management-api.js
+            $('#refreshData').click(function () {
+                renderClassesTable();
+                renderCoursesTable();
+            });
+
+            // Form submissions - handled by school-management-api.js
+        });
+    </script>
+}

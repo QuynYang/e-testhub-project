@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "Bài thi của tôi - Sinh Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/student/my-exams.css" rel="stylesheet">
+}
+
+<div class="my-exams-container">
+    <div class="my-exams-header">
+        <h1 class="my-exams-title">Lịch thi</h1>
+        
+        <!-- Exam Filters -->
+        <div class="exam-filters">
+            <div class="filter-group search-filter">
+                <div class="search-box">
+                    <input type="text" placeholder="Tìm kiếm" id="examSearch">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+            
+            <div class="filter-group view-toggle">
+                <button class="toggle-view-btn" id="toggleCalendarView">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Xem ở dạng lịch</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar View (Initially hidden) -->
+    <div class="calendar-container" id="calendarView" style="display: none;">
+        <div class="calendar-header">
+            <div class="month-selector">
+                <button class="month-nav-btn" id="prevMonth">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <h2 class="current-month" id="currentMonthYear">Tháng 8 <span class="year-highlight">2025</span></h2>
+                <button class="month-nav-btn" id="nextMonth">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="calendar-grid" id="calendarGrid"></div>
+
+        <!-- Exam Details Sidebar -->
+        <div class="exam-details-sidebar" id="examDetailsSidebar" style="display: none;">
+            <div class="calendar-sidebar-header">
+                <h3>Chi tiết kỳ thi</h3>
+                <button class="close-sidebar" id="closeSidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar-content" id="sidebarContent">
+                <!-- Exam details will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- List View (Default) -->
+    <div class="list-view-container" id="listView">
+    
+    <div class="exams-table-container">
+        <table class="exams-table">
+            <thead>
+                <tr>
+                    <th>Tên bài thi</th>
+                    <th>Môn học</th>
+                    <th>Ngày thi</th>
+                    <th>Thời gian</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="examTableBody">
+                <tr id="examsLoadingRow">
+                    <td colspan="6" class="text-center">
+                        <div class="dashboard-loading-inline">
+                            <i class="fas fa-spinner fa-spin"></i> Đang tải lịch thi...
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div> <!-- Close list-view-container -->
+</div> <!-- Close my-exams-container -->
+
+@section Scripts {
+    <script src="~/js/student/my-exams.js"></script>
+}

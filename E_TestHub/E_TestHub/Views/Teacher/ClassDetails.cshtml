@@ -1,0 +1,160 @@
+@{
+    ViewData["Title"] = $"Chi tiết lớp học - {ViewBag.ClassInfo.Name}";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/teacher/class-details.css" rel="stylesheet">
+}
+
+<div>
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb-nav">
+        <a href="@Url.Action("ManageClasses", "Teacher")" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Quay lại
+        </a>
+    </div>
+
+    <!-- Page Header -->
+    <div class="class-details-header">
+        <div class="header-content">
+            
+            <div class="class-info">
+                <h1 class="class-title" id="classTitle">Đang tải...</h1>
+                <div class="class-meta" id="classMeta">
+                    <span class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span id="studentCount">Đang tải...</span> sinh viên
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        Khoá: <span id="academicYear">Đang tải...</span>
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-book"></i>
+                        <span id="subjectName">Đang tải...</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Tổng đề thi</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Đã hoàn thành</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">Tỷ lệ nộp bài</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Tổng sinh viên</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Tabs -->
+    <div class="content-tabs">
+        <button class="tab-btn active" data-tab="students">
+            <i class="fas fa-users"></i>
+            Danh sách sinh viên
+        </button>
+        <button class="tab-btn" data-tab="exams">
+            <i class="fas fa-file-alt"></i>
+            Đề thi
+        </button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+        <!-- Students Tab -->
+        <div class="tab-panel active" data-panel="students">
+            <div class="panel-header">
+                <h3>Danh sách sinh viên (0)</h3>
+                <div class="panel-actions">
+                    <input type="text" id="studentSearch" class="search-input" placeholder="Tìm kiếm sinh viên...">
+                    <button class="export-btn">
+                        <i class="fas fa-download"></i>
+                        Xuất danh sách
+                    </button>
+                </div>
+            </div>
+
+            <div class="students-table-container">
+                <table class="students-table">
+                    <thead>
+                        <tr>
+                            <th>MSSV</th>
+                            <th>Họ tên</th>
+                            <th>Email</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Exams Tab -->
+        <div class="tab-panel" data-panel="exams">
+            <div class="panel-header">
+                <h3>Đề thi đã giao (0)</h3>
+                <div class="panel-actions">
+                    <button class="create-exam-btn">
+                        <i class="fas fa-plus"></i>
+                        Tạo đề thi mới
+                    </button>
+                </div>
+            </div>
+
+            <div class="exams-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/teacher/class-details-api.js"></script>
+    <script src="~/js/teacher/class-details.js"></script>
+}

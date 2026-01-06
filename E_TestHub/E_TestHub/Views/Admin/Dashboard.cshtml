@@ -1,0 +1,136 @@
+@{
+    ViewData["Title"] = "Dashboard - Quản Trị Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <!-- Dashboard CSS is now included in _DashboardLayout.cshtml -->
+}
+
+<!-- Welcome Section -->
+<div class="dashboard-welcome-section">
+    <h1 class="dashboard-welcome-title">Xin chào,</h1>
+    <h2 class="dashboard-welcome-name">@ViewBag.UserName</h2>
+</div>
+
+<!-- Action Cards -->
+<div class="dashboard-action-cards">
+    <a href="@Url.Action("UserManagement", "Admin")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-users-cog"></i>
+        </div>
+        <h3 class="dashboard-action-title">Quản lý người dùng</h3>
+    </a>
+
+    <a href="@Url.Action("CreateUser", "Admin")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-user-plus"></i>
+        </div>
+        <h3 class="dashboard-action-title">Thêm người dùng</h3>
+    </a>
+
+    <a href="@Url.Action("SchoolManagement", "Admin")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-school"></i>
+        </div>
+        <h3 class="dashboard-action-title">Quản lý trường học</h3>
+    </a>
+
+    <a href="@Url.Action("Reports", "Admin")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-chart-bar"></i>
+        </div>
+        <h3 class="dashboard-action-title">Báo cáo thống kê</h3>
+    </a>
+
+    <a href="@Url.Action("AuditLogs", "Admin")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-history"></i>
+        </div>
+        <h3 class="dashboard-action-title">Nhật ký kiểm tra</h3>
+    </a>
+
+    <a href="@Url.Action("SystemSettings", "Admin")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-cogs"></i>
+        </div>
+        <h3 class="dashboard-action-title">Cài đặt hệ thống</h3>
+    </a>
+</div>
+
+<!-- Content Sections -->
+<div class="dashboard-content-sections">
+    <!-- System Overview Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Tổng quan hệ thống</h3>
+            <a href="@Url.Action("Reports", "Admin")" class="dashboard-view-more-btn">
+                <i class="fas fa-external-link-alt"></i>
+                Xem chi tiết
+            </a>
+        </div>
+
+        <ul class="dashboard-item-list">
+            <li class="dashboard-item">
+                <div class="dashboard-item-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="dashboard-item-content">
+                    <h4 class="dashboard-item-title">Tổng số sinh viên</h4>
+                    <p class="dashboard-item-subtitle">Đang tải...</p>
+                    <p class="dashboard-item-subtitle">Đang tải...</p>
+                </div>
+            </li>
+
+            <li class="dashboard-item">
+                <div class="dashboard-item-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="dashboard-item-content">
+                    <h4 class="dashboard-item-title">Tổng số giáo viên</h4>
+                    <p class="dashboard-item-subtitle">Đang tải...</p>
+                    <p class="dashboard-item-subtitle">Đang tải...</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Recent Activities Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Hoạt động gần đây</h3>
+            <a href="@Url.Action("AuditLogs", "Admin")" class="dashboard-view-more-btn">
+                <i class="fas fa-external-link-alt"></i>
+                Xem tất cả
+            </a>
+        </div>
+
+        <ul class="dashboard-item-list">
+            <li class="dashboard-item">
+                <div class="dashboard-item-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="dashboard-item-content">
+                    <h4 class="dashboard-item-title">Tài khoản mới được tạo</h4>
+                    <p class="dashboard-item-subtitle">Đang tải...</p>
+                    <p class="dashboard-item-subtitle">Đang tải...</p>
+                </div>
+            </li>
+
+            <li class="dashboard-item">
+                <div class="dashboard-item-icon">
+                    <i class="fas fa-file-upload"></i>
+                </div>
+                <div class="dashboard-item-content">
+                    <h4 class="dashboard-item-title">Sao lưu dữ liệu</h4>
+                    <p class="dashboard-item-subtitle">Sao lưu tự động thành công</p>
+                    <p class="dashboard-item-subtitle">Hôm qua, 02:00</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin/dashboard-api.js"></script>
+}

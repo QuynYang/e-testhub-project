@@ -1,0 +1,198 @@
+@model E_TestHub.Models.CreateUserViewModel
+@{
+    ViewData["Title"] = "Tạo Người Dùng - Quản Trị Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/admin/create-user.css" rel="stylesheet">
+}
+
+<div class="create-user-container">
+    <div class="create-user-header">
+        <h1 class="create-user-title">Tạo Người Dùng Mới</h1>
+        <p class="create-user-subtitle">Thêm người dùng mới vào hệ thống với thông tin chi tiết</p>
+    </div>
+
+    <div class="create-user-form-container">
+        <form asp-action="CreateUser" method="post" class="create-user-form" id="createUserForm">
+            @Html.AntiForgeryToken()
+
+            <!-- Basic Information Section -->
+            <div class="form-section">
+                <h3 class="section-title">Thông Tin Cơ Bản</h3>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label">Email *</label>
+                    <input asp-for="Email" class="form-control" type="email" placeholder="example@domain.com" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Họ *</label>
+                    <input id="firstName" class="form-control" placeholder="Nguyễn" required />
+                    <span id="firstNameError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tên *</label>
+                    <input id="lastName" class="form-control" placeholder="Văn A" required />
+                    <span id="lastNameError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Role" class="form-label">Vai Trò *</label>
+                    <select asp-for="Role" class="form-control" id="roleSelect" required>
+                        <option value="">Chọn vai trò</option>
+                        <option value="@UserRole.Student">Sinh Viên</option>
+                        <option value="@UserRole.Teacher">Giáo Viên</option>
+                        <option value="@UserRole.Admin">Quản Trị Viên</option>
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Password Section -->
+            <div class="form-section">
+                <h3 class="section-title">Mật Khẩu</h3>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="form-label">Mật Khẩu *</label>
+                    <input asp-for="Password" class="form-control" type="password" id="Password" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="form-label">Xác Nhận Mật Khẩu *</label>
+                    <input asp-for="ConfirmPassword" class="form-control" type="password" id="ConfirmPassword" required />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Role-Specific Fields -->
+            <div id="studentFields" class="form-section role-fields" style="display: none;">
+                <h3 class="section-title">Thông Tin Sinh Viên</h3>
+
+                <div class="form-group">
+                    <label asp-for="StudentId" class="form-label">Mã Sinh Viên</label>
+                    <input asp-for="StudentId" class="form-control" placeholder="SV001" />
+                    <span asp-validation-for="StudentId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Class" class="form-label">Lớp</label>
+                    <input asp-for="Class" class="form-control" placeholder="CNTT01" />
+                    <span asp-validation-for="Class" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div id="teacherFields" class="form-section role-fields" style="display: none;">
+                <h3 class="section-title">Thông Tin Giáo Viên</h3>
+
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="form-label">Mã Nhân Viên</label>
+                    <input asp-for="EmployeeId" class="form-control" placeholder="GV001" />
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Department" class="form-label">Khoa/Bộ Môn</label>
+                    <input asp-for="Department" class="form-control" placeholder="Công Nghệ Thông Tin" />
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div id="adminFields" class="form-section role-fields" style="display: none;">
+                <h3 class="section-title">Thông Tin Quản Trị Viên</h3>
+
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="form-label">Mã Nhân Viên</label>
+                    <input asp-for="EmployeeId" class="form-control" placeholder="QT001" />
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Position" class="form-label">Chức Vụ</label>
+                    <input asp-for="Position" class="form-control" placeholder="Quản Trị Hệ Thống" />
+                    <span asp-validation-for="Position" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Alert Messages -->
+            <div id="errorMessage" class="alert alert-danger" role="alert" style="display: none;"></div>
+            <div id="successMessage" class="alert alert-success" role="alert" style="display: none;"></div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="button" id="createUserBtn" class="btn btn-primary create-user-btn">
+                    <i class="fas fa-user-plus"></i> Tạo Người Dùng
+                </button>
+                <a href="@Url.Action("UserManagement", "Admin")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay Lại
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/admin/create-user-api.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Role selection handler
+            $('#roleSelect').change(function () {
+                var selectedRole = $(this).val();
+                $('.role-fields').hide();
+
+                if (selectedRole == '1') { // Student
+                    $('#studentFields').show();
+                } else if (selectedRole == '2') { // Teacher
+                    $('#teacherFields').show();
+                } else if (selectedRole == '3') { // Admin
+                    $('#adminFields').show();
+                }
+            });
+
+            // Email uniqueness check via API
+            $('#Email').blur(function () {
+                var email = $(this).val();
+                if (email) {
+                    checkEmailExistsAPI(email);
+                }
+            });
+
+            // Password confirmation validation
+            $('#ConfirmPassword').on('input blur', function () {
+                var password = $('#Password').val() || '';
+                var confirmPassword = $(this).val() || '';
+                
+                // Remove previous error
+                $(this).removeClass('is-invalid');
+                $('#passwordMismatchError').remove();
+                
+                // Only validate if both fields have values
+                if (password && confirmPassword) {
+                    if (password !== confirmPassword) {
+                        $(this).addClass('is-invalid');
+                        if (!$('#passwordMismatchError').length) {
+                            $(this).after('<span id="passwordMismatchError" class="text-danger small">Mật khẩu xác nhận không khớp.</span>');
+                        }
+                    }
+                }
+            });
+            
+            // Also validate when password field changes
+            $('#Password').on('input', function () {
+                var password = $(this).val() || '';
+                var confirmPassword = $('#ConfirmPassword').val() || '';
+                
+                if (confirmPassword) {
+                    $('#ConfirmPassword').trigger('blur');
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,682 @@
+@{
+    ViewData["Title"] = $"Chi tiết bài thi - {ViewBag.StudentInfo.StudentName}";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    
+    var studentInfo = ViewBag.StudentInfo;
+    var examInfo = ViewBag.ExamInfo;
+    var timeSpent = ViewBag.TimeSpent;
+    var accuracy = ViewBag.Accuracy;
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/teacher/view-student-exam.css" rel="stylesheet">
+}
+
+<div class="exam-results-container">
+    <!-- Left Sidebar - Question List & Info -->
+    <div class="questions-sidebar">
+        <!-- Student Info Section -->
+        <div class="sidebar-header">
+            <div class="student-info-card">
+                <div class="student-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="student-details">
+                    <div class="student-name">@studentInfo.StudentName</div>
+                    <div class="student-id">MSSV: @studentInfo.StudentId</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Details Section -->
+        <div class="exam-details-section">
+            <h4 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                Thông tin bài thi
+            </h4>
+            
+            <div class="info-row">
+                <span class="info-label">
+                    <i class="fas fa-book"></i>
+                    Môn học:
+                </span>
+                <span class="info-value">@examInfo.Subject</span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">
+                    <i class="fas fa-calendar-alt"></i>
+                    Ngày thi:
+                </span>
+                <span class="info-value">@examInfo.ExamDate.ToString("dd/MM/yyyy HH:mm")</span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">
+                    <i class="fas fa-clock"></i>
+                    Thời gian nộp:
+                </span>
+                <span class="info-value">@examInfo.SubmittedAt.ToString("dd/MM/yyyy HH:mm")</span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">
+                    <i class="fas fa-hourglass-half"></i>
+                    Thời gian làm bài:
+                </span>
+                <span class="info-value">@timeSpent phút</span>
+            </div>
+            
+            <div class="info-row highlight">
+                <span class="info-label">
+                    <i class="fas fa-chart-line"></i>
+                    Độ chính xác:
+                </span>
+                <span class="info-value accuracy">@accuracy%</span>
+            </div>
+            
+            <div class="info-row highlight">
+                <span class="info-label">
+                    <i class="fas fa-star"></i>
+                    Điểm số:
+                </span>
+                <span class="info-value score">@examInfo.Score/@examInfo.MaxScore</span>
+            </div>
+        </div>
+        
+        <!-- Question Statistics -->
+        <div class="question-stats">
+            <div class="stat-row">
+                <span class="stat-label">Tổng số câu:</span>
+                <span class="stat-value">@examInfo.TotalQuestions</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Đúng:</span>
+                <span class="stat-value correct">@examInfo.CorrectAnswers</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Sai:</span>
+                <span class="stat-value incorrect">@examInfo.IncorrectAnswers</span>
+            </div>
+        </div>
+        
+        <div class="question-grid" id="questionGrid">
+            <div class="question-number correct" data-question="1" onclick="showQuestion(1)">1</div>
+            <div class="question-number incorrect" data-question="2" onclick="showQuestion(2)">2</div>
+            <div class="question-number correct" data-question="3" onclick="showQuestion(3)">3</div>
+            <div class="question-number correct" data-question="4" onclick="showQuestion(4)">4</div>
+            <div class="question-number incorrect" data-question="5" onclick="showQuestion(5)">5</div>
+            <div class="question-number correct" data-question="6" onclick="showQuestion(6)">6</div>
+            <div class="question-number correct" data-question="7" onclick="showQuestion(7)">7</div>
+            <div class="question-number incorrect" data-question="8" onclick="showQuestion(8)">8</div>
+            <div class="question-number correct" data-question="9" onclick="showQuestion(9)">9</div>
+            <div class="question-number correct" data-question="10" onclick="showQuestion(10)">10</div>
+            <div class="question-number correct" data-question="11" onclick="showQuestion(11)">11</div>
+            <div class="question-number incorrect" data-question="12" onclick="showQuestion(12)">12</div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="exam-main-content">
+        <!-- Header -->
+        <div class="exam-header">
+            <div class="header-left">
+                <a href="javascript:history.back()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Quay lại
+                </a>
+                <h2 class="exam-title">@examInfo.Name</h2>
+            </div>
+        </div>
+
+        <!-- Question Content -->
+        <div class="question-content">
+            <div id="questionContainer">
+                <!-- Question 1 -->
+                <div class="question-block" id="question1" style="display: block;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 1</h3>
+                        <p class="question-text">Mô hình phát triển phần mềm nào phù hợp nhất cho dự án có yêu cầu thay đổi liên tục?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q1" value="A" disabled>
+                                <span class="answer-text">Waterfall</span>
+                            </label>
+                        </li>
+                        <li class="answer-option user-selected correct">
+                            <label>
+                                <input type="radio" name="q1" value="B" disabled checked>
+                                <span class="answer-text">Agile</span>
+                                <span class="answer-status correct">Đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q1" value="C" disabled>
+                                <span class="answer-text">V-Model</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q1" value="D" disabled>
+                                <span class="answer-text">Spiral</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-block" id="question2" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 2</h3>
+                        <p class="question-text">Design Pattern nào đảm bảo một class chỉ có duy nhất một instance trong toàn bộ ứng dụng?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option user-selected incorrect">
+                            <label>
+                                <input type="radio" name="q2" value="A" disabled checked>
+                                <span class="answer-text">Factory</span>
+                                <span class="answer-status incorrect">Học sinh chọn</span>
+                            </label>
+                        </li>
+                        <li class="answer-option correct">
+                            <label>
+                                <input type="radio" name="q2" value="B" disabled>
+                                <span class="answer-text">Singleton</span>
+                                <span class="answer-status correct">Đáp án đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q2" value="C" disabled>
+                                <span class="answer-text">Observer</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q2" value="D" disabled>
+                                <span class="answer-text">Strategy</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-block" id="question3" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 3</h3>
+                        <p class="question-text">Trong nguyên tắc SOLID, chữ "S" đại diện cho nguyên tắc nào?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option user-selected correct">
+                            <label>
+                                <input type="radio" name="q3" value="A" disabled checked>
+                                <span class="answer-text">Single Responsibility Principle</span>
+                                <span class="answer-status correct">Đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q3" value="B" disabled>
+                                <span class="answer-text">Separation Principle</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q3" value="C" disabled>
+                                <span class="answer-text">Security Principle</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q3" value="D" disabled>
+                                <span class="answer-text">Simplicity Principle</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-block" id="question4" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 4</h3>
+                        <p class="question-text">Công nghệ nào được sử dụng để triển khai Microservices architecture?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q4" value="A" disabled>
+                                <span class="answer-text">Monolithic</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q4" value="B" disabled>
+                                <span class="answer-text">Layered Architecture</span>
+                            </label>
+                        </li>
+                        <li class="answer-option user-selected correct">
+                            <label>
+                                <input type="radio" name="q4" value="C" disabled checked>
+                                <span class="answer-text">Docker & Kubernetes</span>
+                                <span class="answer-status correct">Đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q4" value="D" disabled>
+                                <span class="answer-text">MVC Pattern</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-block" id="question5" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 5</h3>
+                        <p class="question-text">Công cụ nào được sử dụng để quản lý phiên bản mã nguồn (Version Control)?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option correct">
+                            <label>
+                                <input type="radio" name="q5" value="A" disabled>
+                                <span class="answer-text">Git</span>
+                                <span class="answer-status correct">Đáp án đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option user-selected incorrect">
+                            <label>
+                                <input type="radio" name="q5" value="B" disabled checked>
+                                <span class="answer-text">Jenkins</span>
+                                <span class="answer-status incorrect">Học sinh chọn</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q5" value="C" disabled>
+                                <span class="answer-text">Docker</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q5" value="D" disabled>
+                                <span class="answer-text">Jira</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-block" id="question6" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 6</h3>
+                        <p class="question-text">Trong CI/CD, CD viết tắt của từ nào?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q6" value="A" disabled>
+                                <span class="answer-text">Code Development</span>
+                            </label>
+                        </li>
+                        <li class="answer-option user-selected correct">
+                            <label>
+                                <input type="radio" name="q6" value="B" disabled checked>
+                                <span class="answer-text">Continuous Deployment</span>
+                                <span class="answer-status correct">Đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q6" value="C" disabled>
+                                <span class="answer-text">Container Distribution</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q6" value="D" disabled>
+                                <span class="answer-text">Cloud Delivery</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-block" id="question7" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 7</h3>
+                        <p class="question-text">Kiến trúc phần mềm nào tách biệt logic nghiệp vụ khỏi giao diện người dùng?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option user-selected correct">
+                            <label>
+                                <input type="radio" name="q7" value="A" disabled checked>
+                                <span class="answer-text">MVC (Model-View-Controller)</span>
+                                <span class="answer-status correct">Đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q7" value="B" disabled>
+                                <span class="answer-text">Monolithic Architecture</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q7" value="C" disabled>
+                                <span class="answer-text">Client-Server Architecture</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q7" value="D" disabled>
+                                <span class="answer-text">Peer-to-Peer Architecture</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-block" id="question8" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 8</h3>
+                        <p class="question-text">Phương pháp nào được sử dụng để đảm bảo chất lượng phần mềm thông qua kiểm thử tự động?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option correct">
+                            <label>
+                                <input type="radio" name="q8" value="A" disabled>
+                                <span class="answer-text">Unit Testing</span>
+                                <span class="answer-status correct">Đáp án đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q8" value="B" disabled>
+                                <span class="answer-text">Code Review</span>
+                            </label>
+                        </li>
+                        <li class="answer-option user-selected incorrect">
+                            <label>
+                                <input type="radio" name="q8" value="C" disabled checked>
+                                <span class="answer-text">Pair Programming</span>
+                                <span class="answer-status incorrect">Học sinh chọn</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q8" value="D" disabled>
+                                <span class="answer-text">Refactoring</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question-block" id="question9" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 9</h3>
+                        <p class="question-text">Trong REST API, phương thức HTTP nào được sử dụng để cập nhật một phần tài nguyên?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q9" value="A" disabled>
+                                <span class="answer-text">PUT</span>
+                            </label>
+                        </li>
+                        <li class="answer-option user-selected correct">
+                            <label>
+                                <input type="radio" name="q9" value="B" disabled checked>
+                                <span class="answer-text">PATCH</span>
+                                <span class="answer-status correct">Đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q9" value="C" disabled>
+                                <span class="answer-text">POST</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q9" value="D" disabled>
+                                <span class="answer-text">DELETE</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question-block" id="question10" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 10</h3>
+                        <p class="question-text">Cơ sở dữ liệu NoSQL nào phù hợp nhất để lưu trữ dữ liệu dạng document?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option user-selected correct">
+                            <label>
+                                <input type="radio" name="q10" value="A" disabled checked>
+                                <span class="answer-text">MongoDB</span>
+                                <span class="answer-status correct">Đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q10" value="B" disabled>
+                                <span class="answer-text">Redis</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q10" value="C" disabled>
+                                <span class="answer-text">Cassandra</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q10" value="D" disabled>
+                                <span class="answer-text">Neo4j</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question-block" id="question11" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 11</h3>
+                        <p class="question-text">Design Pattern nào được sử dụng để tạo đối tượng mà không cần chỉ định class cụ thể?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option user-selected correct">
+                            <label>
+                                <input type="radio" name="q11" value="A" disabled checked>
+                                <span class="answer-text">Factory Pattern</span>
+                                <span class="answer-status correct">Đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q11" value="B" disabled>
+                                <span class="answer-text">Observer Pattern</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q11" value="C" disabled>
+                                <span class="answer-text">Strategy Pattern</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q11" value="D" disabled>
+                                <span class="answer-text">Decorator Pattern</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question-block" id="question12" style="display: none;">
+                    <div class="question-header">
+                        <h3 class="question-title">Câu 12</h3>
+                        <p class="question-text">Trong bảo mật phần mềm, kỹ thuật nào được sử dụng để bảo vệ mật khẩu trong cơ sở dữ liệu?</p>
+                    </div>
+                    
+                    <ul class="answer-options">
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q12" value="A" disabled>
+                                <span class="answer-text">Encryption</span>
+                            </label>
+                        </li>
+                        <li class="answer-option user-selected incorrect">
+                            <label>
+                                <input type="radio" name="q12" value="B" disabled checked>
+                                <span class="answer-text">Hashing</span>
+                                <span class="answer-status incorrect">Học sinh chọn</span>
+                            </label>
+                        </li>
+                        <li class="answer-option correct">
+                            <label>
+                                <input type="radio" name="q12" value="C" disabled>
+                                <span class="answer-text">Encoding</span>
+                                <span class="answer-status correct">Đáp án đúng</span>
+                            </label>
+                        </li>
+                        <li class="answer-option">
+                            <label>
+                                <input type="radio" name="q12" value="D" disabled>
+                                <span class="answer-text">Compression</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="question-navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousQuestion()">
+                <i class="fas fa-chevron-left"></i>
+                Câu trước
+            </button>
+            
+            <span class="question-counter">
+                Câu <span id="currentQuestionNum">1</span> / 12
+            </span>
+            
+            <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">
+                Câu tiếp
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let currentQuestionIndex = 1;
+        const totalQuestions = 12;
+
+        // Question data with results
+        const questionResults = {
+            1: { correct: true, userAnswer: 'B', correctAnswer: 'B' },
+            2: { correct: false, userAnswer: 'A', correctAnswer: 'B' },
+            3: { correct: true, userAnswer: 'A', correctAnswer: 'A' },
+            4: { correct: true, userAnswer: 'C', correctAnswer: 'C' },
+            5: { correct: false, userAnswer: 'B', correctAnswer: 'A' },
+            6: { correct: true, userAnswer: 'B', correctAnswer: 'B' },
+            7: { correct: true, userAnswer: 'A', correctAnswer: 'A' },
+            8: { correct: false, userAnswer: 'C', correctAnswer: 'A' },
+            9: { correct: true, userAnswer: 'B', correctAnswer: 'B' },
+            10: { correct: true, userAnswer: 'A', correctAnswer: 'A' },
+            11: { correct: true, userAnswer: 'A', correctAnswer: 'A' },
+            12: { correct: false, userAnswer: 'B', correctAnswer: 'C' }
+        };
+
+        function showQuestion(questionNum) {
+            // Hide all questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionElement = document.getElementById(`question${i}`);
+                if (questionElement) {
+                    questionElement.style.display = 'none';
+                }
+            }
+
+            // Show selected question
+            const selectedQuestion = document.getElementById(`question${questionNum}`);
+            if (selectedQuestion) {
+                selectedQuestion.style.display = 'block';
+            } else {
+                console.log(`Question ${questionNum} not found`);
+            }
+
+            // Update current question index
+            currentQuestionIndex = questionNum;
+
+            // Update navigation buttons
+            updateNavigationButtons();
+
+            // Update question counter
+            document.getElementById('currentQuestionNum').textContent = questionNum;
+
+            // Update question number highlighting
+            updateQuestionHighlight();
+        }
+
+        function updateQuestionHighlight() {
+            // Remove current class from all question numbers
+            document.querySelectorAll('.question-number').forEach(element => {
+                element.classList.remove('current');
+            });
+
+            // Add current class to selected question using data-question attribute
+            const currentElement = document.querySelector(`.question-number[data-question="${currentQuestionIndex}"]`);
+            if (currentElement) {
+                currentElement.classList.add('current');
+            }
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            prevBtn.disabled = currentQuestionIndex === 1;
+            nextBtn.disabled = currentQuestionIndex === totalQuestions;
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 1) {
+                showQuestion(currentQuestionIndex - 1);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions) {
+                showQuestion(currentQuestionIndex + 1);
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            showQuestion(1);
+        });
+    </script>
+}

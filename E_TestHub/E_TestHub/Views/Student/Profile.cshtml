@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "Quản lý tài khoản - Sinh Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/student/profile.css" rel="stylesheet">
+}
+
+<!-- Profile Content -->
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <h1 class="profile-title">Quản lý tài khoản</h1>
+        
+        <!-- Avatar Section -->
+        <div class="profile-avatar-section">
+            <div class="profile-avatar" id="studentAvatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <button class="upload-btn" type="button" id="uploadAvatarBtn">
+                <i class="fas fa-upload me-2"></i>Tải lên
+            </button>
+        </div>
+    </div>
+    
+    <!-- Profile Form -->
+    <div class="profile-form">
+        <form id="studentProfileForm">
+            <!-- First Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Họ và tên</label>
+                    <input type="text" class="form-control" id="studentFullName" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Lớp</label>
+                    <input type="text" class="form-control" id="studentClass" readonly>
+                </div>
+            </div>
+            
+            <!-- Second Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Ngày sinh</label>
+                    <input type="text" class="form-control" id="studentBirthday" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mã số sinh viên</label>
+                    <input type="text" class="form-control" id="studentCode" readonly>
+                </div>
+            </div>
+            
+            <!-- Third Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="studentEmail" placeholder="Nhập email">
+                    <span class="form-error" id="studentEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Số điện thoại</label>
+                    <input type="tel" class="form-control" id="studentPhone" placeholder="Nhập số điện thoại">
+                    <span class="form-error" id="studentPhoneError"></span>
+                </div>
+            </div>
+            
+            <!-- Password Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu hiện tại</label>
+                    <input type="password" class="form-control" id="currentPassword" placeholder="Nhập mật khẩu hiện tại">
+                    <a href="#" class="forgot-password-link" id="forgotPasswordLink">Quên mật khẩu?</a>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu mới</label>
+                    <input type="password" class="form-control" id="newPassword" placeholder="Nhập mật khẩu mới">
+                </div>
+            </div>
+            
+            <!-- Save Button -->
+            <div class="form-group">
+                <button type="submit" class="save-btn" id="saveProfileBtn">Lưu thông tin</button>
+                <span class="form-status" id="profileStatusMessage"></span>
+                <div class="clearfix"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/student/profile.js"></script>
+}

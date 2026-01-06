@@ -1,0 +1,166 @@
+@{
+    ViewData["Title"] = "Tạo đề thi thành công";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/teacher/create-exam-success.css" rel="stylesheet">
+}
+
+<div class="success-container">
+    <!-- Success Animation -->
+    <div class="success-animation">
+        <div class="success-checkmark">
+            <div class="check-icon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message">
+        @if (ViewBag.Status == "published")
+        {
+            <h1 class="success-title">
+                <i class="fas fa-rocket"></i> Xuất bản đề thi thành công!
+            </h1>
+            <p class="success-subtitle">
+                Đề thi của bạn đã được xuất bản và sẵn sàng cho sinh viên làm bài
+            </p>
+        }
+        else
+        {
+            <h1 class="success-title">
+                <i class="fas fa-save"></i> Lưu nháp thành công!
+            </h1>
+            <p class="success-subtitle">
+                Đề thi của bạn đã được lưu dưới dạng nháp, bạn có thể tiếp tục chỉnh sửa sau
+            </p>
+        }
+    </div>
+
+    <!-- Exam Info Card -->
+    <div class="exam-info-card">
+        <div class="exam-info-header">
+            <i class="fas fa-file-alt"></i>
+            <h2>Thông tin đề thi</h2>
+        </div>
+        
+        <div class="exam-info-body">
+            <div class="info-row">
+                <span class="info-label">Tên đề thi:</span>
+                <span class="info-value">@ViewBag.ExamName</span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">Số câu hỏi:</span>
+                <span class="info-value">@ViewBag.QuestionCount câu</span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">Tổng điểm:</span>
+                <span class="info-value">@ViewBag.TotalPoints điểm</span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">Trạng thái:</span>
+                @if (ViewBag.Status == "published")
+                {
+                    <span class="info-value status-badge published">
+                        <i class="fas fa-check-circle"></i> Đã xuất bản
+                    </span>
+                }
+                else
+                {
+                    <span class="info-value status-badge draft">
+                        <i class="fas fa-edit"></i> Nháp
+                    </span>
+                }
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">Ngày tạo:</span>
+                <span class="info-value">@ViewBag.CreatedDate.ToString("dd/MM/yyyy HH:mm")</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="success-actions">
+        <a href="@Url.Action("ExamManagement", "Teacher")" class="success-btn btn-primary">
+            <i class="fas fa-list"></i>
+            Về danh sách đề thi
+        </a>
+        
+        @if (ViewBag.Status == "draft")
+        {
+            <a href="@Url.Action("CreateExam", "Teacher")" class="success-btn btn-secondary">
+                <i class="fas fa-edit"></i>
+                Tiếp tục chỉnh sửa
+            </a>
+        }
+        else
+        {
+            <a href="#" class="success-btn btn-secondary" onclick="alert('Tính năng xem chi tiết đang phát triển'); return false;">
+                <i class="fas fa-eye"></i>
+                Xem chi tiết đề thi
+            </a>
+        }
+        
+        <a href="@Url.Action("CreateExam", "Teacher")" class="success-btn btn-outline">
+            <i class="fas fa-plus"></i>
+            Tạo đề thi mới
+        </a>
+    </div>
+
+    <!-- Share Options (Optional) -->
+    <div class="success-share">
+        <p class="share-text">Chia sẻ với đồng nghiệp</p>
+        <div class="share-buttons">
+            <button class="share-btn" onclick="copyExamLink()" title="Sao chép link">
+                <i class="fas fa-link"></i>
+            </button>
+            <button class="share-btn" onclick="alert('Tính năng đang phát triển')" title="Gửi email">
+                <i class="fas fa-envelope"></i>
+            </button>
+            <button class="share-btn" onclick="alert('Tính năng đang phát triển')" title="In đề thi">
+                <i class="fas fa-print"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto redirect after 30 seconds
+        let countdown = 30;
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = '@Url.Action("ExamManagement", "Teacher")';
+            }
+        }, 1000);
+
+        // Copy exam link function
+        function copyExamLink() {
+            const examLink = window.location.origin + '/Teacher/ExamManagement';
+            navigator.clipboard.writeText(examLink).then(() => {
+                alert('Đã sao chép link vào clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        // Success animation trigger
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.querySelector('.success-checkmark').classList.add('show');
+            }, 200);
+        });
+    </script>
+}

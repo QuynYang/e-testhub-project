@@ -1,0 +1,194 @@
+@{
+    ViewData["Title"] = "Cài Đặt Hệ Thống - Quản Trị Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/admin/system-settings.css" rel="stylesheet">
+}
+
+<div class="system-settings-container">
+    <div class="system-settings-header">
+        <h1 class="system-settings-title">Cài Đặt Hệ Thống</h1>
+        <p class="system-settings-subtitle">Quản lý các cài đặt chung của hệ thống E-TestHub</p>
+    </div>
+
+    <div class="system-settings-content">
+        <form asp-action="SystemSettings" method="post" class="system-settings-form" id="systemSettingsForm">
+            @Html.AntiForgeryToken()
+
+            <!-- General Settings -->
+            <div class="settings-section">
+                <h3 class="section-title">Cài Đặt Chung</h3>
+
+                <div class="form-group">
+                    <label for="siteName" class="form-label">Tên Website</label>
+                    <input type="text" id="siteName" name="siteName" class="form-control" value="E-TestHub" placeholder="Nhập tên website" />
+                </div>
+
+                <div class="form-group">
+                    <label for="siteDescription" class="form-label">Mô Tả Website</label>
+                    <textarea id="siteDescription" name="siteDescription" class="form-control" rows="3" placeholder="Nhập mô tả website">Hệ thống quản lý thi cử trực tuyến</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="defaultLanguage" class="form-label">Ngôn Ngữ Mặc Định</label>
+                    <select id="defaultLanguage" name="defaultLanguage" class="form-control">
+                        <option value="vi" selected>Tiếng Việt</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="timezone" class="form-label">Múi Giờ</label>
+                    <select id="timezone" name="timezone" class="form-control">
+                        <option value="Asia/Ho_Chi_Minh" selected>(GMT+7) Asia/Ho_Chi_Minh</option>
+                        <option value="Asia/Bangkok">(GMT+7) Asia/Bangkok</option>
+                        <option value="UTC">(GMT+0) UTC</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Email Settings -->
+            <div class="settings-section">
+                <h3 class="section-title">Cài Đặt Email</h3>
+
+                <div class="form-group">
+                    <label for="smtpServer" class="form-label">SMTP Server</label>
+                    <input type="text" id="smtpServer" name="smtpServer" class="form-control" placeholder="smtp.gmail.com" />
+                </div>
+
+                <div class="form-group">
+                    <label for="smtpPort" class="form-label">SMTP Port</label>
+                    <input type="number" id="smtpPort" name="smtpPort" class="form-control" placeholder="587" />
+                </div>
+
+                <div class="form-group">
+                    <label for="smtpUsername" class="form-label">SMTP Username</label>
+                    <input type="email" id="smtpUsername" name="smtpUsername" class="form-control" placeholder="your-email@gmail.com" />
+                </div>
+
+                <div class="form-group">
+                    <label for="smtpPassword" class="form-label">SMTP Password</label>
+                    <input type="password" id="smtpPassword" name="smtpPassword" class="form-control" placeholder="App password hoặc mật khẩu" />
+                </div>
+
+                <div class="form-group">
+                    <label for="fromEmail" class="form-label">Email Gửi Từ</label>
+                    <input type="email" id="fromEmail" name="fromEmail" class="form-control" placeholder="noreply@etest.com" />
+                </div>
+            </div>
+
+            <!-- Security Settings -->
+            <div class="settings-section">
+                <h3 class="section-title">Cài Đặt Bảo Mật</h3>
+
+                <div class="form-group">
+                    <label for="sessionTimeout" class="form-label">Thời Gian Timeout Session (phút)</label>
+                    <input type="number" id="sessionTimeout" name="sessionTimeout" class="form-control" value="30" min="5" max="480" />
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordMinLength" class="form-label">Độ Dài Tối Thiểu Mật Khẩu</label>
+                    <input type="number" id="passwordMinLength" name="passwordMinLength" class="form-control" value="6" min="4" max="20" />
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="enableTwoFactor" name="enableTwoFactor" class="form-check-input" />
+                    <label for="enableTwoFactor" class="form-check-label">Bật Xác Thực Hai Yếu Tố</label>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="requireStrongPassword" name="requireStrongPassword" class="form-check-input" checked />
+                    <label for="requireStrongPassword" class="form-check-label">Yêu Cầu Mật Khẩu Mạnh</label>
+                </div>
+            </div>
+
+            <!-- Exam Settings -->
+            <div class="settings-section">
+                <h3 class="section-title">Cài Đặt Kỳ Thi</h3>
+
+                <div class="form-group">
+                    <label for="defaultExamDuration" class="form-label">Thời Gian Thi Mặc Định (phút)</label>
+                    <input type="number" id="defaultExamDuration" name="defaultExamDuration" class="form-control" value="60" min="15" max="300" />
+                </div>
+
+                <div class="form-group">
+                    <label for="maxAttempts" class="form-label">Số Lần Thi Tối Đa</label>
+                    <input type="number" id="maxAttempts" name="maxAttempts" class="form-control" value="3" min="1" max="10" />
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="allowReviewAfterSubmit" name="allowReviewAfterSubmit" class="form-check-input" checked />
+                    <label for="allowReviewAfterSubmit" class="form-check-label">Cho Phép Xem Lại Sau Khi Nộp Bài</label>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="shuffleQuestions" name="shuffleQuestions" class="form-check-input" />
+                    <label for="shuffleQuestions" class="form-check-label">Xáo Trộn Câu Hỏi</label>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary save-settings-btn">
+                    <i class="fas fa-save"></i> Lưu Cài Đặt
+                </button>
+                <button type="button" class="btn btn-secondary reset-settings-btn">
+                    <i class="fas fa-undo"></i> Khôi Phục Mặc Định
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Reset to default settings
+            $('.reset-settings-btn').click(function () {
+                if (confirm('Bạn có chắc muốn khôi phục cài đặt mặc định? Tất cả thay đổi sẽ bị mất.')) {
+                    // Reset form to default values
+                    $('#siteName').val('E-TestHub');
+                    $('#siteDescription').val('Hệ thống quản lý thi cử trực tuyến');
+                    $('#defaultLanguage').val('vi');
+                    $('#timezone').val('Asia/Ho_Chi_Minh');
+                    $('#sessionTimeout').val('30');
+                    $('#passwordMinLength').val('6');
+                    $('#defaultExamDuration').val('60');
+                    $('#maxAttempts').val('3');
+
+                    // Reset checkboxes
+                    $('#enableTwoFactor').prop('checked', false);
+                    $('#requireStrongPassword').prop('checked', true);
+                    $('#allowReviewAfterSubmit').prop('checked', true);
+                    $('#shuffleQuestions').prop('checked', false);
+
+                    // Clear email settings
+                    $('#smtpServer, #smtpPort, #smtpUsername, #smtpPassword, #fromEmail').val('');
+                }
+            });
+
+            // Form validation before submit
+            $('#systemSettingsForm').submit(function (e) {
+                var isValid = true;
+
+                // Validate required fields if any
+                $('.form-control[required]').each(function () {
+                    if (!$(this).val().trim()) {
+                        $(this).addClass('is-invalid');
+                        isValid = false;
+                    } else {
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Vui lòng điền đầy đủ thông tin bắt buộc.');
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,185 @@
+@model E_TestHub.Models.LoginViewModel
+@{
+    ViewData["Title"] = "eTestHub - Nền tảng thi trắc nghiệm online";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/auth/login.css" rel="stylesheet">
+</head>
+<body>
+    <div class="etesthub-container">
+        <!-- Header -->
+        <header class="etesthub-header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="container-fluid">
+                    <a class="navbar-brand fw-bold text-primary fs-3" asp-controller="Home" asp-action="Index">eTestHub</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link etesthub-nav-link" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link etesthub-nav-link" href="#">Bảng giá</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link etesthub-nav-link" href="#">Liên hệ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+    <hr class="my-0 border-secondary">
+    <div class="etesthub-main">
+            <!-- Main Content -->
+            <div class="container etesthub-container-bg">
+                <div class="row align-items-center justify-content-center">
+                    <!-- Left Content Area -->
+                    <div class="etesthub-left-content col-lg-7 col-md-6">
+                    <!-- Badge -->
+                    <div>
+                    <div class="badge bg-primary-light text-white px-2 py-1 rounded-pill mb-2 small">
+                        #1 Nền tảng thi trắc nghiệm online tốt nhất
+                    </div>
+                    
+                    <h1 class="h2 fw-bold text-white mb-2">
+                        Có cách đơn giản hơn để <span class="text-warning">tổ chức kỳ thi</span> trắc nghiệm online
+                    </h1>
+                    
+                    <p class="text-light mb-2 fs-6">
+                        Giải pháp thông minh từ eTestHub cho phép bạn thiết kế câu hỏi và đề thi một cách tiện lợi, tối ưu hóa quy trình học tập.
+                    </p>
+                    
+                    <div class="mb-2">
+                        <small class="text-light" style="font-size: 0.75rem;">Hơn 100,000+ khách hàng đã yêu thích sử dụng</small>
+                    </div>
+                    
+                </div>
+
+
+                    <!-- Customer Avatars -->
+                    <div class="etesthub-customers d-flex align-items-center mb-3">
+                        <div class="etesthub-avatars d-flex">
+                            <div class="etesthub-avatar">
+                                <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=50&h=50&q=80" alt="User 1">
+                            </div>
+                            <div class="etesthub-avatar">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=50&h=50&q=80" alt="User 2">
+                            </div>
+                            <div class="etesthub-avatar">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=50&h=50&q=80" alt="User 3">
+                            </div>
+                            <div class="etesthub-avatar">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=50&h=50&q=80" alt="User 4">
+                            </div>
+                            <div class="etesthub-avatar etesthub-avatar-more">
+                                <span>+</span>
+                            </div>
+                        </div>
+                        <span class="etesthub-customer-text small">Hơn 100.000+ khách hàng đã yêu thích sử dụng</span>
+                    </div>
+
+                    <!-- Dashboard Preview Image -->
+                    <div class="etesthub-dashboard-image">
+                        <img src="~/images/dashboard-mockup.png" alt="Dashboard Preview" class="img-fluid" style="background: transparent;" />
+                    </div>
+                </div>
+
+                    <!-- Right Login Form -->
+                    <div class="col-lg-5 col-md-6 d-flex justify-content-center">
+                        <div class="etesthub-login-form-card bg-white rounded-4 shadow-lg p-4">
+                            <div class="text-center mb-4">
+                                <div class="login-icon-wrapper mb-3">
+                                    <i class="fas fa-user-circle text-primary fs-1"></i>
+                                </div>
+                                <h2 class="etesthub-login-title fw-bold">Đăng nhập</h2>
+                                <p class="text-muted small">Chào mừng trở lại với eTestHub</p>
+                            </div>
+                            
+                            <form id="loginForm" class="etesthub-form">
+                                <div id="errorMessage" class="alert alert-danger" role="alert" style="display: none;"></div>
+                                <div id="successMessage" class="alert alert-success" role="alert" style="display: none;"></div>
+                                
+                                <!-- Role Selection Buttons -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold text-dark">Chọn vai trò <span class="text-danger">*</span></label>
+                                    <div class="d-grid gap-2">
+                                        <button type="button" id="roleStudentBtn" class="btn btn-outline-primary role-btn" data-role="student">
+                                            <i class="fas fa-user-graduate me-1"></i> Sinh viên
+                                        </button>
+                                        <button type="button" id="roleTeacherBtn" class="btn btn-outline-success role-btn" data-role="teacher">
+                                            <i class="fas fa-chalkboard-teacher me-1"></i> Giáo viên
+                                        </button>
+                                        <button type="button" id="roleAdminBtn" class="btn btn-outline-warning role-btn" data-role="admin">
+                                            <i class="fas fa-user-shield me-1"></i> Quản trị viên
+                                        </button>
+                                    </div>
+                                    <span id="roleError" class="text-danger small"></span>
+                                    <input type="hidden" id="selectedRole" value="">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold text-dark">Email <span class="text-danger">*</span></label>
+                                    <input id="emailInput" type="email" class="form-control etesthub-input" placeholder="Nhập email của bạn" required>
+                                    <span id="emailError" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold text-dark">Mật khẩu <span class="text-danger">*</span></label>
+                                    <input id="passwordInput" type="password" class="form-control etesthub-input" placeholder="Nhập mật khẩu" required>
+                                    <span id="passwordError" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-4 d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                                        <label class="form-check-label small text-muted" for="rememberMe">
+                                            Ghi nhớ đăng nhập
+                                        </label>
+                                    </div>
+                                    <a href="#" id="forgotPasswordLink" class="etesthub-forgot-link small">Quên mật khẩu?</a>
+                                </div>
+                                <button type="submit" id="loginButton" class="btn etesthub-btn-login w-100 mb-3 py-3 fw-semibold">
+                                    <span id="loginButtonText">Đăng nhập</span>
+                                    <span id="loginButtonSpinner" class="spinner-border spinner-border-sm ms-2" style="display: none;"></span>
+                                </button>
+                                
+                                <div class="etesthub-divider text-center mb-3">Hoặc</div>
+                                
+                                <button type="button" class="btn etesthub-btn-google w-100 py-3">
+                                    <i class="fab fa-google me-2"></i>
+                                    Đăng nhập bằng Google
+                                </button>
+                            </form>
+
+                            <form id="forgotPasswordForm" class="etesthub-form" style="display: none;">
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold text-dark">Email</label>
+                                    <input type="email" class="form-control etesthub-input" placeholder="Nhập email để khôi phục mật khẩu">
+                                </div>
+                                <button type="submit" class="btn etesthub-btn-login w-100 mb-3 py-3 fw-semibold">Gửi yêu cầu</button>
+                                
+                                <div class="text-center">
+                                    <a href="#" id="backToLoginLink" class="etesthub-forgot-link small">Quay lại đăng nhập</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/login.js"></script>
+</body>
+</html>

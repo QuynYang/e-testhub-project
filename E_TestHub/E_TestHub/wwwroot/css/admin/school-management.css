@@ -1,0 +1,495 @@
+/* ===================================
+   SCHOOL MANAGEMENT STYLES
+   E_TestHub v0.3.0 - Admin
+   =================================== */
+
+.school-management-container {
+    padding: 32px;
+    min-height: 100vh;
+    background: #F8FAFC;
+}
+
+.school-management-header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.school-management-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.school-management-subtitle {
+    font-size: 1.125rem;
+    color: #64748B;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+/* Management Sections */
+.management-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    margin-bottom: 32px;
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1E293B;
+    margin: 0;
+}
+
+.section-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 2px solid #E2E8F0;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    width: 250px;
+    transition: all 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #2E8BE9;
+    box-shadow: 0 0 0 3px rgba(46, 139, 233, 0.1);
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.management-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    background: white;
+}
+
+.management-table th,
+.management-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #E2E8F0;
+    vertical-align: middle;
+}
+
+.management-table th {
+    background: #F8FAFC;
+    font-weight: 700;
+    color: #1E293B;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 2px solid #E2E8F0;
+    white-space: nowrap;
+}
+
+.management-table td {
+    color: #4B5563;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Column specific widths for Classes table */
+#classesTable th:nth-child(1),
+#classesTable td:nth-child(1) {
+    width: 100px;
+    min-width: 100px;
+}
+
+#classesTable th:nth-child(2),
+#classesTable td:nth-child(2) {
+    width: 200px;
+    min-width: 200px;
+}
+
+#classesTable th:nth-child(3),
+#classesTable td:nth-child(3) {
+    width: 180px;
+    min-width: 180px;
+}
+
+#classesTable th:nth-child(4),
+#classesTable td:nth-child(4) {
+    width: 80px;
+    min-width: 80px;
+    text-align: center;
+}
+
+#classesTable th:nth-child(5),
+#classesTable td:nth-child(5) {
+    width: 180px;
+    min-width: 180px;
+}
+
+#classesTable th:nth-child(6),
+#classesTable td:nth-child(6) {
+    width: 120px;
+    min-width: 120px;
+}
+
+#classesTable th:nth-child(7),
+#classesTable td:nth-child(7) {
+    width: 120px;
+    min-width: 120px;
+}
+
+/* Column specific widths for Courses table */
+#coursesTable th:nth-child(1),
+#coursesTable td:nth-child(1) {
+    width: 120px;
+    min-width: 120px;
+}
+
+#coursesTable th:nth-child(2),
+#coursesTable td:nth-child(2) {
+    width: 250px;
+    min-width: 250px;
+}
+
+#coursesTable th:nth-child(3),
+#coursesTable td:nth-child(3) {
+    width: 120px;
+    min-width: 120px;
+    text-align: center;
+}
+
+#coursesTable th:nth-child(4),
+#coursesTable td:nth-child(4) {
+    width: 120px;
+    min-width: 120px;
+    text-align: center;
+}
+
+#coursesTable th:nth-child(5),
+#coursesTable td:nth-child(5) {
+    width: 100px;
+    min-width: 100px;
+    text-align: center;
+}
+
+#coursesTable th:nth-child(6),
+#coursesTable td:nth-child(6) {
+    width: 120px;
+    min-width: 120px;
+}
+
+#coursesTable th:nth-child(7),
+#coursesTable td:nth-child(7) {
+    width: 120px;
+    min-width: 120px;
+}
+
+.management-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.management-table tbody tr:hover {
+    background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+    transform: scale(1.002);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.status-active {
+    background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+    color: #065F46;
+    border: 1px solid #10B981;
+}
+
+.status-inactive {
+    background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+    color: #991B1B;
+    border: 1px solid #EF4444;
+}
+
+/* Action Buttons */
+.btn-action {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 4px;
+}
+
+.btn-action:hover {
+    background: #F3F4F6;
+}
+
+.btn-edit {
+    color: #2E8BE9;
+}
+
+.btn-edit:hover {
+    background: #EFF6FF;
+}
+
+.btn-delete {
+    color: #EF4444;
+}
+
+.btn-delete:hover {
+    background: #FEF2F2;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 0.875rem;
+}
+
+.btn-primary {
+    background: #2E8BE9;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1E6FBF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(46, 139, 233, 0.3);
+}
+
+.btn-secondary {
+    background: #6B7280;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #4B5563;
+    transform: translateY(-1px);
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modal-header {
+    border-bottom: 1px solid #E2E8F0;
+    padding: 24px;
+}
+
+.modal-title {
+    font-weight: 600;
+    color: #1E293B;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6B7280;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-footer {
+    border-top: 1px solid #E2E8F0;
+    padding: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 6px;
+    font-size: 0.875rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #E2E8F0;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2E8BE9;
+    box-shadow: 0 0 0 3px rgba(46, 139, 233, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .school-management-container {
+        padding: 15px;
+    }
+
+    .management-section {
+        margin-bottom: 30px;
+    }
+
+    .section-header {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+    }
+
+    .section-description {
+        font-size: 0.875rem;
+    }
+
+    /* Table responsive */
+    .table-responsive {
+        border-radius: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .management-table {
+        min-width: 600px;
+        font-size: 0.875rem;
+    }
+
+    .management-table th,
+    .management-table td {
+        padding: 12px 8px;
+        white-space: nowrap;
+    }
+
+    /* Classes table specific */
+    #classesTable th:nth-child(1), #classesTable td:nth-child(1) { width: 80px; } /* Mã Lớp */
+    #classesTable th:nth-child(2), #classesTable td:nth-child(2) { width: 150px; } /* Tên Lớp */
+    #classesTable th:nth-child(3), #classesTable td:nth-child(3) { width: 120px; } /* Khóa Học */
+    #classesTable th:nth-child(4), #classesTable td:nth-child(4) { width: 100px; } /* Sĩ Số */
+    #classesTable th:nth-child(5), #classesTable td:nth-child(5) { width: 100px; } /* Giáo Viên */
+    #classesTable th:nth-child(6), #classesTable td:nth-child(6) { width: 100px; } /* Trạng Thái */
+    #classesTable th:nth-child(7), #classesTable td:nth-child(7) { width: 120px; } /* Thao Tác */
+
+    /* Courses table specific */
+    #coursesTable th:nth-child(1), #coursesTable td:nth-child(1) { width: 100px; } /* Mã Khóa Học */
+    #coursesTable th:nth-child(2), #coursesTable td:nth-child(2) { width: 200px; } /* Tên Khóa Học */
+    #coursesTable th:nth-child(3), #coursesTable td:nth-child(3) { width: 100px; } /* Năm Bắt Đầu */
+    #coursesTable th:nth-child(4), #coursesTable td:nth-child(4) { width: 100px; } /* Năm Kết Thúc */
+    #coursesTable th:nth-child(5), #coursesTable td:nth-child(5) { width: 100px; } /* Số Lớp */
+    #coursesTable th:nth-child(6), #coursesTable td:nth-child(6) { width: 100px; } /* Trạng Thái */
+    #coursesTable th:nth-child(7), #coursesTable td:nth-child(7) { width: 120px; } /* Thao Tác */
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .btn-action {
+        padding: 6px 8px;
+        font-size: 0.75rem;
+    }
+
+    .status-badge {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .school-management-container {
+        padding: 10px;
+    }
+
+    .management-section {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 1.125rem;
+    }
+
+    .management-table {
+        font-size: 0.8rem;
+    }
+
+    .management-table th,
+    .management-table td {
+        padding: 8px 6px;
+    }
+
+    /* Further reduce column widths for very small screens */
+    #classesTable th:nth-child(2), #classesTable td:nth-child(2) { width: 120px; } /* Tên Lớp */
+    #classesTable th:nth-child(3), #classesTable td:nth-child(3) { width: 100px; } /* Khóa Học */
+    #classesTable th:nth-child(5), #classesTable td:nth-child(5) { width: 80px; } /* Giáo Viên */
+
+    #coursesTable th:nth-child(2), #coursesTable td:nth-child(2) { width: 150px; } /* Tên Khóa Học */
+
+    .btn-action {
+        padding: 4px 6px;
+        font-size: 0.7rem;
+    }
+
+    .status-badge {
+        padding: 3px 6px;
+        font-size: 0.65rem;
+    }
+}

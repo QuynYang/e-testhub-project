@@ -1,0 +1,221 @@
+@{
+    ViewData["Title"] = "Thông báo";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/student/notifications.css" rel="stylesheet">
+}
+
+<div class="notifications-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <div class="header-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="header-text">
+                <h1 class="page-title">Thông báo</h1>
+                <p class="page-subtitle">Cập nhật các thông báo mới nhất từ hệ thống</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm thông báo...">
+                <button class="clear-search-btn" id="clearSearchBtn" style="display: none;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-section">
+        <div class="stat-card">
+            <div class="stat-icon blue-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number" id="unreadCount">@ViewBag.UnreadCount</div>
+                <div class="stat-label">Chưa đọc</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon gray-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">@ViewBag.TotalCount</div>
+                <div class="stat-label">Tổng thông báo</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon blue-icon">
+                <i class="fas fa-calendar-day"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Hôm nay</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications List -->
+    <div class="notifications-section">
+        <div class="notifications-list" id="notificationsList">
+            @foreach (var notification in ViewBag.Notifications)
+            {
+                <div class="notification-card @(!notification.IsRead ? "unread" : "")" 
+                     data-notification-id="@notification.Id" 
+                     data-notification-type="@notification.Type">
+                    <div class="notification-icon @(!notification.IsRead ? "blue" : "gray")">
+                        <i class="fas @notification.Icon"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-header">
+                            <h3 class="notification-title">@notification.Title</h3>
+                            <span class="notification-time">
+                                <i class="fas fa-clock"></i>
+                                @notification.Time
+                            </span>
+                        </div>
+                        <p class="notification-message">@notification.Message</p>
+                        <div class="notification-footer">
+                            <span class="notification-type-badge @(!notification.IsRead ? "blue" : "gray")">
+                                <i class="fas @notification.Icon"></i>
+                                @(notification.Type switch
+                                {
+                                    "exam" => "Bài thi",
+                                    "result" => "Kết quả",
+                                    "schedule" => "Lịch thi",
+                                    "system" => "Hệ thống",
+                                    "announcement" => "Thông báo",
+                                    _ => "Khác"
+                                })
+                            </span>
+                            <a href="@notification.Link" class="notification-link">
+                                <i class="fas fa-arrow-right"></i>
+                                @notification.LinkText
+                            </a>
+                        </div>
+                    </div>
+                    @if (!notification.IsRead)
+                    {
+                        <div class="unread-indicator"></div>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noNotificationsMessage" class="no-results" style="display: none;">
+            <i class="fas fa-search"></i>
+            <h3>Không tìm thấy kết quả</h3>
+            <p>Không có thông báo nào khớp với từ khóa tìm kiếm của bạn</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            const notificationsList = document.getElementById('notificationsList');
+            const noNotificationsMessage = document.getElementById('noNotificationsMessage');
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                
+                // Show/hide clear button
+                clearSearchBtn.style.display = searchTerm ? 'flex' : 'none';
+                
+                // Perform search
+                searchNotifications(searchTerm);
+            });
+
+            // Clear search
+            clearSearchBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                clearSearchBtn.style.display = 'none';
+                searchNotifications('');
+                searchInput.focus();
+            });
+
+            function searchNotifications(searchTerm) {
+                const notificationCards = document.querySelectorAll('.notification-card');
+                let visibleCount = 0;
+
+                notificationCards.forEach(card => {
+                    const title = card.querySelector('.notification-title').textContent.toLowerCase();
+                    const message = card.querySelector('.notification-message').textContent.toLowerCase();
+                    
+                    // Search in title and message
+                    if (searchTerm === '' || title.includes(searchTerm) || message.includes(searchTerm)) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                if (visibleCount === 0 && searchTerm !== '') {
+                    notificationsList.style.display = 'none';
+                    noNotificationsMessage.style.display = 'flex';
+                } else {
+                    notificationsList.style.display = '';
+                    noNotificationsMessage.style.display = 'none';
+                }
+            }
+
+            // Mark as read when clicking on notification link
+            document.addEventListener('click', function(e) {
+                const link = e.target.closest('.notification-link');
+                if (link) {
+                    const card = link.closest('.notification-card');
+                    if (card && card.classList.contains('unread')) {
+                        // Mark as read visually
+                        card.classList.remove('unread');
+                        
+                        // Update icon color
+                        const icon = card.querySelector('.notification-icon');
+                        if (icon) {
+                            icon.classList.remove('blue');
+                            icon.classList.add('gray');
+                        }
+                        
+                        // Update badge color
+                        const badge = card.querySelector('.notification-type-badge');
+                        if (badge) {
+                            badge.classList.remove('blue');
+                            badge.classList.add('gray');
+                        }
+                        
+                        // Remove unread indicator
+                        const unreadIndicator = card.querySelector('.unread-indicator');
+                        if (unreadIndicator) {
+                            unreadIndicator.style.animation = 'fadeOut 0.3s ease';
+                            setTimeout(() => unreadIndicator.remove(), 300);
+                        }
+                        
+                        // Update unread count
+                        const unreadCountElement = document.getElementById('unreadCount');
+                        if (unreadCountElement) {
+                            const currentCount = parseInt(unreadCountElement.textContent);
+                            if (currentCount > 0) {
+                                unreadCountElement.textContent = currentCount - 1;
+                            }
+                        }
+                    }
+                    // Link will navigate normally after this
+                }
+            });
+        });
+    </script>
+}

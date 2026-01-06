@@ -1,0 +1,75 @@
+@{
+    ViewData["Title"] = "Dashboard - Giáo Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+}
+
+<!-- Welcome Section -->
+<div class="dashboard-welcome-section">
+    <h1 class="dashboard-welcome-title">Xin chào,</h1>
+    <h2 class="dashboard-welcome-name" id="teacherWelcomeName">@ViewBag.UserName</h2>
+</div>
+
+<!-- Action Cards -->
+<div class="dashboard-action-cards">
+    <a href="@Url.Action("QuestionBank", "Teacher")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-university"></i>
+        </div>
+        <h3 class="dashboard-action-title">Ngân hàng câu hỏi</h3>
+    </a>
+
+    <a href="@Url.Action("ExamManagement", "Teacher")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-folder"></i>
+        </div>
+        <h3 class="dashboard-action-title">Quản lý đề thi</h3>
+    </a>
+
+    <a href="@Url.Action("ViewResults", "Teacher")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="dashboard-action-title">Xem kết quả thi</h3>
+    </a>
+</div>
+
+<!-- Content Sections -->
+<div class="dashboard-content-sections">
+    <!-- Teaching Classes Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Lớp đang giảng dạy</h3>
+            <a href="@Url.Action("ManageClasses", "Teacher")" class="dashboard-view-more-btn">
+                <i class="fas fa-external-link-alt"></i>
+                Xem thêm
+            </a>
+        </div>
+
+        <ul class="dashboard-item-list" id="teachingClassesList">
+            <li class="dashboard-item-empty">Đang tải dữ liệu lớp...</li>
+        </ul>
+    </div>
+
+    <!-- Recent Exams Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Kỳ thi đã tạo gần đây</h3>
+            <a href="@Url.Action("ExamManagement", "Teacher")" class="dashboard-view-more-btn">
+                <i class="fas fa-external-link-alt"></i>
+                Xem thêm
+            </a>
+        </div>
+
+        <ul class="dashboard-item-list" id="recentExamsList">
+            <li class="dashboard-item-empty">Đang tải dữ liệu kỳ thi...</li>
+        </ul>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/teacher/dashboard.js"></script>
+}

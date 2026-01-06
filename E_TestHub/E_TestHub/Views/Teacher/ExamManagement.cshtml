@@ -1,0 +1,162 @@
+@{
+    ViewData["Title"] = "Quản lý đề thi";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/teacher/exam-management.css" rel="stylesheet">
+}
+
+<!-- Welcome Section -->
+<div class="dashboard-welcome-section">
+    <h1 class="dashboard-welcome-title" style="font-weight: 700; color: #1a73e8;">Quản lý đề thi</h1>
+    <p class="dashboard-welcome-subtitle">Tạo, chỉnh sửa và quản lý các đề thi của bạn</p>
+</div>
+
+<!-- Action Cards -->
+<div class="dashboard-action-cards">
+    <a href="@Url.Action("CreateExam", "Teacher")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-plus-circle"></i>
+        </div>
+        <h3 class="dashboard-action-title">Tạo đề thi mới</h3>
+        <p class="dashboard-action-subtitle">Tạo đề thi trắc nghiệm mới</p>
+    </a>
+
+    <a href="@Url.Action("QuestionBank", "Teacher")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-database"></i>
+        </div>
+        <h3 class="dashboard-action-title">Ngân hàng câu hỏi</h3>
+        <p class="dashboard-action-subtitle">Quản lý kho câu hỏi</p>
+    </a>
+
+    <a href="#" class="dashboard-action-card" onclick="openSearchModal(); return false;">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-search"></i>
+        </div>
+        <h3 class="dashboard-action-title">Tìm kiếm đề thi</h3>
+        <p class="dashboard-action-subtitle">Tìm kiếm nhanh theo tên</p>
+    </a>
+</div>
+
+<!-- Content Sections -->
+<div class="dashboard-content-sections">
+    <!-- Recent Exams Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Đề thi gần đây</h3>
+            <a href="#all-exams" class="dashboard-view-more-btn">
+                <i class="fas fa-chevron-down"></i>
+                Xem tất cả
+            </a>
+        </div>
+
+        <ul class="dashboard-item-list" id="recentExamsList">
+            <li class="dashboard-item-empty">Đang tải dữ liệu...</li>
+        </ul>
+    </div>
+
+    <!-- Exam Statistics Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Thống kê</h3>
+        </div>
+
+        <div class="exam-stats-grid">
+            <div class="exam-stat-card">
+                <div class="exam-stat-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="exam-stat-content">
+                    <h4 class="exam-stat-number" id="totalExamsStat">0</h4>
+                    <p class="exam-stat-label">Tổng đề thi</p>
+                </div>
+            </div>
+
+            <div class="exam-stat-card">
+                <div class="exam-stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="exam-stat-content">
+                    <h4 class="exam-stat-number" id="ongoingExamsStat">0</h4>
+                    <p class="exam-stat-label">Đang diễn ra</p>
+                </div>
+            </div>
+
+            <div class="exam-stat-card">
+                <div class="exam-stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="exam-stat-content">
+                    <h4 class="exam-stat-number" id="submittedExamsStat">0</h4>
+                    <p class="exam-stat-label">Bài đã nộp</p>
+                </div>
+            </div>
+
+            <div class="exam-stat-card">
+                <div class="exam-stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="exam-stat-content">
+                    <h4 class="exam-stat-number" id="studentsStat">0</h4>
+                    <p class="exam-stat-label">Sinh viên</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- All Exams Section (Anchor for scroll) -->
+<div id="all-exams" class="dashboard-section" style="margin-top: 50px;">
+    <div class="dashboard-section-header">
+        <h3 class="dashboard-section-title">Tất cả đề thi</h3>
+        <div class="exam-table-search">
+            <input type="text" id="examSearch" placeholder="Tìm kiếm đề thi..." />
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
+    <div class="exam-table-container">
+        <table class="exam-table">
+            <thead>
+                <tr>
+                    <th>Tên đề thi</th>
+                    <th>Số câu hỏi</th>
+                    <th>Thời gian</th>
+                    <th>Lớp</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="examTableBody">
+                <tr class="exam-table-empty">
+                    <td colspan="6" style="text-align: center; padding: 35px; color: #6c757d;">Đang tải danh sách đề thi...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Search Modal -->
+<div id="searchModal" class="search-modal" style="display: none;">
+    <div class="search-modal-content">
+        <div class="search-modal-header">
+            <h3>Tìm kiếm đề thi</h3>
+            <button onclick="closeSearchModal()" class="search-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="search-modal-body">
+            <input type="text" id="modalSearchInput" placeholder="Nhập tên đề thi..." class="search-modal-input" />
+            <div id="searchResults" class="search-results">
+                <p class="search-placeholder">Nhập để tìm kiếm...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/teacher/exam-management.js"></script>
+}

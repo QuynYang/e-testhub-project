@@ -1,0 +1,164 @@
+@{
+    ViewData["Title"] = "Báo Cáo Thống Kê - Quản Trị Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/admin/reports.css" rel="stylesheet">
+}
+
+<div class="reports-container">
+    <div class="reports-header">
+        <h1 class="reports-title">Báo Cáo Thống Kê</h1>
+        <p class="reports-subtitle">Xem tổng quan và báo cáo chi tiết về hệ thống</p>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="reports-filters">
+        <div class="filter-group">
+            <label for="reportType" class="filter-label">Loại Báo Cáo</label>
+            <select id="reportType" class="filter-select">
+                <option value="overview" selected>Tổng Quan</option>
+                <option value="users">Người Dùng</option>
+                <option value="exams">Kỳ Thi</option>
+                <option value="performance">Hiệu Suất</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="dateRange" class="filter-label">Khoảng Thời Gian</label>
+            <select id="dateRange" class="filter-select">
+                <option value="today">Hôm Nay</option>
+                <option value="week" selected>Tuần Này</option>
+                <option value="month">Tháng Này</option>
+                <option value="quarter">Quý Này</option>
+                <option value="year">Năm Nay</option>
+                <option value="custom">Tùy Chỉnh</option>
+            </select>
+        </div>
+
+        <div class="filter-group date-range-group" style="display: none;">
+            <label class="filter-label">Từ Ngày</label>
+            <input type="date" id="startDate" class="filter-input" />
+        </div>
+
+        <div class="filter-group date-range-group" style="display: none;">
+            <label class="filter-label">Đến Ngày</label>
+            <input type="date" id="endDate" class="filter-input" />
+        </div>
+
+        <div class="filter-actions">
+            <button id="generateReport" class="btn btn-primary">
+                <i class="fas fa-chart-bar"></i> Tạo Báo Cáo
+            </button>
+            <button id="exportReport" class="btn btn-secondary">
+                <i class="fas fa-download"></i> Xuất Báo Cáo
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-cards">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-content">
+                <h3 class="stat-number" id="statTotalUsers">...</h3>
+                <p class="stat-label">Tổng Người Dùng</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <div class="stat-content">
+                <h3 class="stat-number" id="statActiveUsers">...</h3>
+                <p class="stat-label">Người Dùng Hoạt Động</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="stat-content">
+                <h3 class="stat-number" id="statStudents">...</h3>
+                <p class="stat-label">Sinh Viên</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="stat-content">
+                <h3 class="stat-number" id="statTeachers">...</h3>
+                <p class="stat-label">Giáo Viên</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-content">
+                <h3 class="stat-number" id="statTotalExams">...</h3>
+                <p class="stat-label">Tổng Kỳ Thi</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-content">
+                <h3 class="stat-number" id="statCompletedExams">...</h3>
+                <p class="stat-label">Kỳ Thi Hoàn Thành</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <div class="chart-container">
+            <h3 class="chart-title">Thống Kê Người Dùng Theo Vai Trò</h3>
+            <canvas id="userRoleChart" width="400" height="200"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="chart-title">Hoạt Động Kỳ Thi Theo Thời Gian</h3>
+            <canvas id="examActivityChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Detailed Reports Table -->
+    <div class="reports-table-container">
+        <h3 class="table-title">Chi Tiết Báo Cáo</h3>
+        <div class="table-responsive">
+            <table class="reports-table" id="reportsTable">
+                <thead>
+                    <tr>
+                        <th>Ngày</th>
+                        <th>Người Dùng Mới</th>
+                        <th>Kỳ Thi Tạo</th>
+                        <th>Kỳ Thi Hoàn Thành</th>
+                        <th>Điểm Trung Bình</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated by JavaScript -->
+                    <tr>
+                        <td colspan="5" style="text-align: center;">Đang tải dữ liệu...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/js/admin/reports-api.js"></script>
+}

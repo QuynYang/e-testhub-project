@@ -1,0 +1,88 @@
+@{
+    ViewData["Title"] = "Làm bài thi - Sinh Viên";
+    Layout = "~/Views/Shared/_ExamLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/student/take-exam.css" rel="stylesheet">
+}
+
+<div class="exam-container" id="takeExamContainer" data-exam-id="@ViewBag.ExamId">
+    <button class="question-nav-toggle" id="questionNavToggle" onclick="toggleQuestionNav()">
+        <i class="fas fa-list"></i>
+        <span>Danh sách câu hỏi</span>
+    </button>
+
+    <div class="question-nav-sidebar" id="questionNavSidebar">
+        <div class="nav-header">
+            <div class="nav-title">Danh sách câu hỏi</div>
+            <div class="nav-subtitle">Đã hoàn thành: <span id="completedCount">0</span>/<span id="navTotalQuestions">0</span> câu hỏi</div>
+            <button class="nav-close-btn" onclick="toggleQuestionNav()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="question-grid" id="questionNavGrid">
+            <div class="dashboard-loading-inline">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải câu hỏi...
+            </div>
+        </div>
+    </div>
+
+    <div class="exam-main-content">
+        <div class="exam-header">
+            <div class="exam-info">
+                <a href="@Url.Action("ExamInfo", "Student", new { examId = ViewBag.ExamId })" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Quay lại
+                </a>
+                <h1 class="exam-title" id="examTitle">Đang tải bài thi...</h1>
+            </div>
+
+            <div class="exam-controls">
+                <div class="timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="timeRemaining">--:--:--</span>
+                </div>
+                <button class="submit-btn" id="submitExamButton" onclick="submitExam()" disabled>
+                    <i class="fas fa-paper-plane"></i>
+                    Nộp bài
+                </button>
+            </div>
+        </div>
+
+        <div class="question-content">
+            <div class="question-header">
+                <h2 class="question-title">Câu <span id="currentQuestionNumber">0</span></h2>
+            </div>
+
+            <div id="questionContainer">
+                <div class="dashboard-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Đang tải câu hỏi...
+                </div>
+            </div>
+        </div>
+
+        <div class="question-navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousQuestion()" disabled>
+                <i class="fas fa-chevron-left"></i>
+                Câu trước
+            </button>
+
+            <span class="question-counter">
+                Câu <span id="currentQuestion">0</span> / <span id="totalQuestions">0</span>
+            </span>
+
+            <button class="nav-btn primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                Câu tiếp
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/student/take-exam.js"></script>
+}
+

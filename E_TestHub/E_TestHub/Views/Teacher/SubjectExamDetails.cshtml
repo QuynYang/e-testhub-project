@@ -1,0 +1,109 @@
+@{
+    ViewData["Title"] = "Chi tiết kết quả theo môn";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    var subjectCode = ViewBag.SubjectCode as string ?? string.Empty;
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/teacher/subject-exam-details.css" rel="stylesheet">
+}
+
+<div class="subject-details-container" id="subjectExamDetailsContainer" data-subject-code="@subjectCode">
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb-nav">
+        <a href="@Url.Action("ViewResults", "Teacher")" class="breadcrumb-link">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+
+    <!-- Subject Header -->
+    <div class="subject-header">
+        <div class="subject-header-content">
+            <h1 class="subject-title" id="subjectName">
+                <i class="fas fa-book"></i>
+                Đang tải...
+            </h1>
+            <p class="subject-code-label">Mã môn: <span class="subject-code-value" id="subjectCodeValue">@subjectCode</span></p>
+        </div>
+        <div class="subject-stats">
+            <div class="stat-item">
+                <span class="stat-label">Số bài thi:</span>
+                <span class="stat-value" id="subjectExamCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Điểm TB:</span>
+                <span class="stat-value" id="subjectAverageScore">0.0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="results-message" id="subjectDetailsMessage" style="display:none;"></div>
+
+    <!-- Exams List Section -->
+    <div class="exams-list-section">
+        <h2 class="section-title">
+            <i class="fas fa-file-alt"></i>
+            Danh sách bài thi
+        </h2>
+        
+        <div class="exams-cards-grid" id="subjectExamCards">
+            <div class="exam-card loading-card">
+                <div class="exam-card-body" style="text-align:center; color:#666;">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải danh sách bài thi...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Results Section -->
+    <div class="student-results-section">
+        <div class="results-section-header">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>
+                Bảng điểm học sinh
+            </h2>
+            
+            <!-- Filter & Search Controls -->
+            <div class="results-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="studentSearch" placeholder="Tìm kiếm theo MSSV hoặc tên...">
+                </div>
+                <select id="gradeFilter" class="grade-filter">
+                    <option value="">Tất cả xếp loại</option>
+                    <option value="excellent">Xuất sắc (≥ 8.5)</option>
+                    <option value="good">Giỏi (7.0 - 8.4)</option>
+                    <option value="fair">Khá (5.5 - 6.9)</option>
+                    <option value="average">Trung bình (4.0 - 5.4)</option>
+                    <option value="poor">Yếu (< 4.0)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="results-table-container">
+            <table class="results-table" id="studentResultsTableWrapper">
+                <thead id="studentResultsTableHead">
+                    <tr>
+                        <th>MSSV</th>
+                        <th>Họ và tên</th>
+                        <th>Điểm TB</th>
+                        <th>Xếp loại</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="studentResultsTableBody">
+                    <tr>
+                        <td colspan="5" style="text-align:center; padding:40px; color:#666;">
+                            <i class="fas fa-spinner fa-spin"></i> Đang tải bảng điểm...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/teacher/subject-exam-details.js"></script>
+}

@@ -1,0 +1,139 @@
+@{
+    ViewData["Title"] = "Xem kết quả thi - Giáo Viên";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/teacher/view-results.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+}
+
+<div class="view-results-container">
+    <!-- Page Header -->
+    <div class="view-results-header">
+        <h1 class="view-results-title">
+            <i class="fas fa-chart-line"></i>
+            Xem kết quả thi
+        </h1>
+        <button class="export-all-btn" onclick="exportAllResults()">
+            <i class="fas fa-file-excel"></i>
+            Xuất toàn bộ báo cáo
+        </button>
+    </div>
+
+    <div class="results-message" id="teacherResultsMessage" style="display:none;"></div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards-grid">
+        <div class="stat-card">
+            <div class="stat-card-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <div class="stat-card-content">
+                <h3 class="stat-card-value" id="totalSubjectsValue">0</h3>
+                <p class="stat-card-label">Môn học</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-card-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-card-content">
+                <h3 class="stat-card-value" id="totalExamsValue">0</h3>
+                <p class="stat-card-label">Bài thi đã tạo</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <div class="chart-container">
+            <h3 class="chart-title">
+                <i class="fas fa-chart-bar"></i>
+                Điểm trung bình theo môn học
+            </h3>
+            <canvas id="averageScoreChart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <h3 class="chart-title">
+                <i class="fas fa-chart-pie"></i>
+                Phân bố xếp loại
+            </h3>
+            <canvas id="gradeDistributionChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Subject Results Table -->
+    <div class="results-section">
+        <div class="results-section-header">
+            <h2 class="section-title">Danh sách môn học</h2>
+            
+            <!-- Filter & Search Controls -->
+            <div class="results-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="subjectSearch" placeholder="Tìm kiếm theo mã môn hoặc tên môn...">
+                </div>
+                <select id="scoreFilter" class="score-filter">
+                    <option value="">Tất cả mức điểm</option>
+                    <option value="excellent">Xuất sắc (≥ 8.5)</option>
+                    <option value="good">Giỏi (7.0 - 8.4)</option>
+                    <option value="fair">Khá (5.5 - 6.9)</option>
+                    <option value="average">Trung bình (< 5.5)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="results-table-container">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-column="code">
+                            Mã môn
+                            <i class="fas fa-sort sort-icon"></i>
+                        </th>
+                        <th class="sortable" data-column="name">
+                            Tên môn
+                            <i class="fas fa-sort sort-icon"></i>
+                        </th>
+                        <th class="sortable" data-column="examCount">
+                            Số bài đã tạo
+                            <i class="fas fa-sort sort-icon"></i>
+                        </th>
+                        <th class="sortable" data-column="average">
+                            Điểm trung bình
+                            <i class="fas fa-sort sort-icon"></i>
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="subjectResultsTable">
+                    <tr>
+                        <td colspan="5" style="text-align:center; padding:40px; color:#666;">
+                            <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu môn học...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container" id="paginationContainer" style="display: none;">
+            <nav aria-label="Subject results pagination">
+                <ul class="pagination" id="paginationList">
+                    <!-- Pagination items will be generated by JavaScript -->
+                </ul>
+            </nav>
+            <div class="pagination-info">
+                Hiển thị <span id="currentRange">0-0</span> trong tổng số <span id="totalItems">0</span> môn học
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/teacher/view-results-dashboard.js"></script>
+}

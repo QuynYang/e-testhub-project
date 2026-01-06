@@ -1,0 +1,101 @@
+@{
+    ViewData["Title"] = "Chi tiết đề thi";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/teacher/exam-details.css" rel="stylesheet">
+}
+
+<!-- Welcome Section -->
+<div class="dashboard-welcome-section">
+    <h1 class="dashboard-welcome-title" style="font-weight: 700; color: #1a73e8;">Chi tiết đề thi</h1>
+    <p class="dashboard-welcome-subtitle">Xem và quản lý thông tin chi tiết của đề thi</p>
+</div>
+
+<!-- Action Cards -->
+<div class="dashboard-action-cards">
+    <a href="@Url.Action("ExamManagement", "Teacher")" class="dashboard-action-card">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <h3 class="dashboard-action-title">Quay lại</h3>
+        <p class="dashboard-action-subtitle">Về danh sách đề thi</p>
+    </a>
+
+    <a href="#" class="dashboard-action-card" id="editExamBtn" onclick="return false;">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-edit"></i>
+        </div>
+        <h3 class="dashboard-action-title">Chỉnh sửa</h3>
+        <p class="dashboard-action-subtitle">Sửa đổi đề thi</p>
+    </a>
+
+    <a href="#" class="dashboard-action-card" id="copyExamBtn" onclick="return false;">
+        <div class="dashboard-action-icon">
+            <i class="fas fa-copy"></i>
+        </div>
+        <h3 class="dashboard-action-title">Sao chép</h3>
+        <p class="dashboard-action-subtitle">Tạo bản sao đề thi</p>
+    </a>
+</div>
+
+<!-- Content Sections -->
+<div class="dashboard-content-sections">
+    <!-- Exam Information Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Kết quả thi của sinh viên</h3>
+        </div>
+
+        <div id="examResultsContainer">
+            <div class="loading" style="text-align: center; padding: 20px;">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải kết quả thi...
+            </div>
+        </div>
+    </div>
+
+    <!-- Questions Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Danh sách câu hỏi</h3>
+            <span class="question-count">0 câu hỏi</span>
+        </div>
+
+        <div class="questions-list">
+            <div class="loading" style="text-align: center; padding: 20px;">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải câu hỏi...
+            </div>
+        </div>
+    </div>
+
+    <!-- Scheduled Information Section -->
+    <div class="dashboard-section">
+        <div class="dashboard-section-header">
+            <h3 class="dashboard-section-title">Lịch thi</h3>
+        </div>
+
+        <div class="schedule-info">
+            <div class="schedule-item">
+                <i class="fas fa-calendar-alt"></i>
+                <div class="schedule-details">
+                    <h4>Ngày thi dự kiến</h4>
+                    <p id="scheduledDate">Đang tải...</p>
+                </div>
+            </div>
+            <div class="schedule-item">
+                <i class="fas fa-clock"></i>
+                <div class="schedule-details">
+                    <h4>Thời gian làm bài</h4>
+                    <p id="examDuration">Đang tải...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/teacher/exam-details-api.js"></script>
+}
+

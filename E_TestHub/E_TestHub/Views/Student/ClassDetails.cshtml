@@ -1,0 +1,165 @@
+@{
+    ViewData["Title"] = "Chi tiết lớp học";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/shared/dashboard.css" rel="stylesheet">
+    <link href="~/css/student/class-details.css" rel="stylesheet">
+}
+
+<div class="class-details-container">
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb-nav">
+        <a href="@Url.Action("Classes", "Student")" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Quay lại danh sách lớp
+        </a>
+    </div>
+
+    <!-- Class Header -->
+    <div class="class-header">
+        <div class="header-content">
+            <div class="class-icon-large">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="class-info" id="classInfoHeader">
+                <h1 class="class-title" id="className">Đang tải lớp học...</h1>
+                <div class="class-meta">
+                    <span class="meta-item">
+                        <i class="fas fa-user-tie"></i>
+                        Giảng viên: <span id="classTeacher">Đang tải...</span>
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        Khóa: <span id="classYear">Đang tải...</span>
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-book"></i>
+                        Môn học: <span id="classSubject">Đang tải...</span>
+                    </span>
+                </div>
+                <div class="class-code-badge" id="classCodeBadge" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-section">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number" id="totalStudentsCount">0</div>
+                <div class="stat-label">Tổng sinh viên</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number" id="visibleStudentsCount">0</div>
+                <div class="stat-label">Đang hiển thị</div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number" id="teacherCount">0</div>
+                <div class="stat-label">Giảng viên</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Students List Section -->
+    <div class="students-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-list"></i>
+                Danh sách sinh viên
+            </h2>
+            
+            <div class="header-controls">
+                <!-- Items Per Page Selector -->
+                <div class="items-per-page">
+                    <label for="itemsPerPage">
+                        <i class="fas fa-th-list"></i>
+                        Hiển thị:
+                    </label>
+                    <select id="itemsPerPage" class="items-select">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="all">Tất cả</option>
+                    </select>
+                </div>
+
+                <!-- Search Box -->
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="studentSearch" placeholder="Tìm kiếm theo MSSV hoặc tên...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Students Table -->
+        <div class="students-table-container">
+            <table class="students-table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>MSSV</th>
+                        <th>Họ và tên</th>
+                        <th>Email</th>
+                        <th class="text-center">Liên hệ</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                    <tr id="studentsLoadingRow">
+                        <td colspan="5" class="text-center">
+                            <div class="dashboard-loading-inline">
+                                <i class="fas fa-spinner fa-spin"></i> Đang tải danh sách sinh viên...
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- No Results Message -->
+            <div id="noResultsMessage" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <p>Không tìm thấy sinh viên nào</p>
+            </div>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-container">
+            <div class="pagination-info">
+                <span>Hiển thị <strong id="displayFrom">0</strong> - <strong id="displayTo">0</strong> trong tổng số <strong id="totalCount">0</strong> sinh viên</span>
+            </div>
+
+            <div class="pagination-controls" id="paginationControls">
+                <button class="pagination-btn" id="prevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Trước
+                </button>
+                <div class="pagination-numbers" id="paginationNumbers"></div>
+                <button class="pagination-btn" id="nextBtn">
+                    Sau
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/student/class-details.js"></script>
+}

@@ -1,0 +1,535 @@
+/* eTestHub Custom Styles */
+:root {
+  --primary-blue: #2e8be9;
+  --secondary-blue: #1e7bd9;
+  --light-bg: #fafaff;
+  --dark-text: #2f3542;
+  --muted-text: #b4bbc3;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+.etesthub-container {
+  min-height: 100vh;
+}
+
+.etesthub-container-bg {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+/* Header Styles */
+.etesthub-header {
+  background-color: var(--light-bg);
+}
+
+.etesthub-logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+}
+
+.etesthub-nav-link {
+  color: var(--dark-text) !important;
+  margin-right: 2rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.etesthub-nav-link:hover {
+  color: var(--primary-blue) !important;
+}
+
+.etesthub-btn-primary {
+  background-color: var(--primary-blue);
+  border: none;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.etesthub-btn-primary:hover {
+  background-color: var(--secondary-blue);
+}
+
+/* Main Layout */
+.etesthub-main {
+  min-height: calc(100vh - 80px);
+}
+
+/* Sidebar */
+.etesthub-sidebar {
+  width: 4rem;
+  background-color: var(--primary-blue);
+  padding: 1.5rem 0;
+}
+
+.etesthub-sidebar-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+.etesthub-sidebar-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.etesthub-sidebar-icon.active,
+.etesthub-sidebar-icon:hover {
+  color: white;
+}
+
+/* Content Area */
+.etesthub-content {
+  display: flex;
+}
+
+.etesthub-left-content {
+  flex: 1;
+  padding: 0;
+}
+
+/* Badge */
+.etesthub-badge {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+/* Main Heading */
+.etesthub-main-heading {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.etesthub-heading-large {
+  font-size: 3.5rem;
+}
+
+/* Description */
+.etesthub-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  max-width: 32rem;
+}
+
+/* Customer Avatars */
+.etesthub-customers {
+  margin-bottom: 3rem;
+}
+
+.etesthub-avatars {
+  margin-right: 1rem;
+}
+
+.etesthub-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-right: -0.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.etesthub-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.etesthub-avatar-more {
+  background-color: var(--dark-text);
+  color: white;
+  font-size: 0.75rem;
+}
+
+.etesthub-customer-text {
+  color: white;
+  font-size: 1rem;
+}
+
+/* Dashboard Card */
+.etesthub-dashboard-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: 48rem;
+}
+
+.etesthub-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.etesthub-card-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--primary-blue);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.etesthub-card-icon i {
+  color: white;
+  font-size: 1rem;
+}
+
+.etesthub-greeting {
+  color: var(--dark-text);
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.etesthub-username {
+  color: var(--primary-blue);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* Feature Cards */
+.etesthub-feature-card {
+  background-color: var(--light-bg);
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+.etesthub-feature-icon {
+  color: var(--primary-blue);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.etesthub-feature-text {
+  color: var(--dark-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+/* Section Styles */
+.etesthub-section-title {
+  color: var(--dark-text);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.etesthub-btn-outline-sm {
+  color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
+  background: transparent;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+}
+
+.etesthub-btn-outline-sm:hover {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+/* Class and Exam Items */
+.etesthub-class-list,
+.etesthub-exam-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.etesthub-class-item,
+.etesthub-exam-item {
+  background-color: var(--light-bg);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.etesthub-class-icon,
+.etesthub-exam-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--primary-blue);
+  border-radius: 0.25rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.etesthub-class-code,
+.etesthub-exam-name {
+  color: var(--primary-blue);
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.etesthub-class-info,
+.etesthub-exam-info {
+  color: var(--muted-text);
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+/* Login Form */
+.etesthub-login-form {
+  width: 24rem;
+  background-color: var(--light-bg);
+  padding: 2rem;
+}
+
+.etesthub-login-form-card {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.login-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.login-icon-wrapper i {
+  color: white !important;
+}
+
+.etesthub-login-title {
+  color: var(--dark-text);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.etesthub-input {
+  height: 3rem;
+  border: 1px solid var(--muted-text);
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.etesthub-input:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 0.2rem rgba(46, 139, 233, 0.25);
+}
+
+.etesthub-forgot-link {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.etesthub-forgot-link:hover {
+  text-decoration: underline;
+}
+
+.etesthub-btn-login {
+  background-color: var(--primary-blue);
+  border: none;
+  color: white;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s ease;
+}
+
+.etesthub-btn-login:hover {
+  background-color: var(--secondary-blue);
+}
+
+.etesthub-divider {
+  color: var(--muted-text);
+  font-size: 0.875rem;
+  position: relative;
+}
+
+.etesthub-divider::before,
+.etesthub-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background-color: var(--muted-text);
+}
+
+.etesthub-divider::before {
+  left: 0;
+}
+
+.etesthub-divider::after {
+  right: 0;
+}
+
+.etesthub-btn-google {
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+  background: transparent;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.etesthub-btn-google:hover {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+/* Role Selection Buttons */
+.role-btn {
+  transition: all 0.3s ease;
+  font-weight: 500;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.role-btn.active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+}
+
+/* Ensure text is always visible - override Bootstrap defaults */
+.role-btn.btn-outline-primary {
+  color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
+.role-btn.btn-outline-primary:hover,
+.role-btn.btn-outline-primary:focus {
+  color: #fff !important;
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
+.role-btn.btn-outline-success {
+  color: #198754 !important;
+  border-color: #198754 !important;
+}
+
+.role-btn.btn-outline-success:hover,
+.role-btn.btn-outline-success:focus {
+  color: #fff !important;
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+}
+
+.role-btn.btn-outline-warning {
+  color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
+.role-btn.btn-outline-warning:hover,
+.role-btn.btn-outline-warning:focus {
+  color: #000 !important;
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
+/* Solid button styles when active */
+.role-btn.btn-primary {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+  color: #fff !important;
+}
+
+.role-btn.btn-success {
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+  color: #fff !important;
+}
+
+.role-btn.btn-warning {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+/* Ensure icons and text are always visible */
+.role-btn i,
+.role-btn span {
+  display: inline-block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .etesthub-main-heading {
+    font-size: 2rem;
+  }
+
+  .etesthub-heading-large {
+    font-size: 2.5rem;
+  }
+
+  .etesthub-login-form {
+    width: 100%;
+    max-width: 24rem;
+  }
+
+  .etesthub-content {
+    flex-direction: column;
+  }
+}
+@media (max-width: 576px) {
+  .etesthub-dashboard-card {
+    margin: 0 -1rem;
+  }
+
+  .etesthub-main-heading {
+    font-size: 1.75rem;
+  }
+
+  .etesthub-heading-large {
+    font-size: 2rem;
+  }
+}
