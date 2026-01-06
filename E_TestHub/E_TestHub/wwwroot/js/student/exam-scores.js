@@ -1,4 +1,4 @@
-const EXAM_SCORES_API_BASE_URL = "http://localhost:3000/api";
+const EXAM_SCORES_API_BASE_URL = "https://e-testhub-project.onrender.com/api";
 const EXAM_RESULTS_ENDPOINT = `${EXAM_SCORES_API_BASE_URL}/exam-results`;
 
 const examScoresState = {

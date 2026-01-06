@@ -1,5 +1,5 @@
 // Teacher Class Details API Integration
-const CLASS_DETAILS_API_BASE_URL = "http://localhost:3000/api";
+const CLASS_DETAILS_API_BASE_URL = "https://e-testhub-project.onrender.com/api";
 
 // Get token from localStorage
 function getToken() {

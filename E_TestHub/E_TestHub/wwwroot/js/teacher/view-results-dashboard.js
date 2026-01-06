@@ -1,4 +1,4 @@
-const TEACHER_RESULTS_API_BASE_URL = "http://localhost:3000/api";
+const TEACHER_RESULTS_API_BASE_URL = "https://e-testhub-project.onrender.com/api";
 const TEACHER_EXAMS_ENDPOINT = `${TEACHER_RESULTS_API_BASE_URL}/exams`;
 const TEACHER_EXAM_RESULTS_ENDPOINT = `${TEACHER_RESULTS_API_BASE_URL}/exam-results`;
 

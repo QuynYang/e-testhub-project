@@ -1,5 +1,5 @@
 // Teacher Exam Management - API integration and UI rendering
-const EXAM_API_BASE_URL = 'http://localhost:3000/api';
+const EXAM_API_BASE_URL = 'https://e-testhub-project.onrender.com/api';
 
 let examsCache = [];
 let filteredExams = [];

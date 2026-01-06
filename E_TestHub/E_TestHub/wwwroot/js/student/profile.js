@@ -1,5 +1,5 @@
 // Student Profile API Integration
-const STUDENT_API_BASE_URL = 'http://localhost:3000/api';
+const STUDENT_API_BASE_URL = 'https://e-testhub-project.onrender.com/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeStudentProfile();

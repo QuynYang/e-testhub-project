@@ -1,4 +1,4 @@
-const VIEW_RESULTS_API_BASE_URL = "http://localhost:3000/api";
+const VIEW_RESULTS_API_BASE_URL = "https://e-testhub-project.onrender.com/api";
 const VIEW_RESULTS_ENDPOINT = `${VIEW_RESULTS_API_BASE_URL}/exam-results`;
 const OPTION_KEY_SEQUENCE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 

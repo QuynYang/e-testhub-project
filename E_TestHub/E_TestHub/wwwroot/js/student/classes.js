@@ -4,7 +4,7 @@
  * Description: Multiple view modes, search, sort, and filter functionality
  */
 
-const STUDENT_CLASSES_API_BASE_URL = "http://localhost:3000/api";
+const STUDENT_CLASSES_API_BASE_URL = "https://e-testhub-project.onrender.com/api";
 
 document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("searchInput");

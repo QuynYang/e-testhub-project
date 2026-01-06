@@ -1,4 +1,4 @@
-const SUBJECT_DETAILS_API_BASE_URL = "http://localhost:3000/api";
+const SUBJECT_DETAILS_API_BASE_URL = "https://e-testhub-project.onrender.com/api";
 const SUBJECT_EXAMS_ENDPOINT = `${SUBJECT_DETAILS_API_BASE_URL}/exams`;
 const SUBJECT_EXAM_RESULTS_ENDPOINT = `${SUBJECT_DETAILS_API_BASE_URL}/exam-results`;
 const SUBJECT_USERS_ENDPOINT = `${SUBJECT_DETAILS_API_BASE_URL}/users`;

@@ -1,5 +1,5 @@
 // Teacher Manage Classes API Integration
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://e-testhub-project.onrender.com/api';
 
 // Get current user ID from localStorage
 function getCurrentUserId() {
