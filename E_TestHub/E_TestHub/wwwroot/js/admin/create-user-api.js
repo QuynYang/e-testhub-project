@@ -4,9 +4,18 @@ const API_BASE_URL = 'https://e-testhub-project.onrender.com/api';
 // Map C# UserRole enum to API role string
 function mapRoleToAPI(roleValue) {
     const roleMap = {
+        // Numeric values
         '1': 'student',
         '2': 'teacher',
-        '3': 'admin'
+        '3': 'admin',
+        // String values (from C# enum ToString())
+        'Student': 'student',
+        'Teacher': 'teacher',
+        'Admin': 'admin',
+        // Lowercase variants
+        'student': 'student',
+        'teacher': 'teacher',
+        'admin': 'admin'
     };
     return roleMap[roleValue] || 'student';
 }

@@ -44,9 +44,9 @@
                     <label asp-for="Role" class="form-label">Vai Trò *</label>
                     <select asp-for="Role" class="form-control" id="roleSelect" required>
                         <option value="">Chọn vai trò</option>
-                        <option value="@UserRole.Student">Sinh Viên</option>
-                        <option value="@UserRole.Teacher">Giáo Viên</option>
-                        <option value="@UserRole.Admin">Quản Trị Viên</option>
+                        <option value="student">Sinh Viên</option>
+                        <option value="teacher">Giáo Viên</option>
+                        <option value="admin">Quản Trị Viên</option>
                     </select>
                     <span asp-validation-for="Role" class="text-danger"></span>
                 </div>
@@ -147,11 +147,11 @@
                 var selectedRole = $(this).val();
                 $('.role-fields').hide();
 
-                if (selectedRole == '1') { // Student
+                if (selectedRole == 'student' || selectedRole == '1' || selectedRole == 'Student') {
                     $('#studentFields').show();
-                } else if (selectedRole == '2') { // Teacher
+                } else if (selectedRole == 'teacher' || selectedRole == '2' || selectedRole == 'Teacher') {
                     $('#teacherFields').show();
-                } else if (selectedRole == '3') { // Admin
+                } else if (selectedRole == 'admin' || selectedRole == '3' || selectedRole == 'Admin') {
                     $('#adminFields').show();
                 }
             });
