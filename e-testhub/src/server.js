@@ -9,9 +9,24 @@ const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
 
+// CORS Configuration - Allow Frontend to call API
+const corsOptions = {
+  origin: [
+    "https://e-testhub-frontend.onrender.com",
+    "http://localhost:5209",
+    "http://localhost:3000",
+    "http://localhost:5000"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+};
+
 // Middlewares
-app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 app.use(express.json());
 app.use(morgan("dev"));
 
