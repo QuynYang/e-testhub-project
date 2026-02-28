@@ -14,7 +14,7 @@ A Node.js/Express + MongoDB API for managing users, classes, courses, subjects, 
 ### 1) Clone repository
 
 ```bash
-git clone https://github.com/<your-username>/e-testhub.git
+git clone https://github.com/QuynYang/e-testhub.git
 cd e-testhub
 ```
 
